@@ -40,6 +40,18 @@ module DiscoursePresetTopicComposer
                   "Enter the category ID this topic should be created in. Set to 0 to enable all categories.",
                 minimum: 0,
               },
+              tagGroups: {
+                title: "Tag group dropdowns",
+                type: "array",
+                uniqueItems: true,
+                items: {
+                  type: "object",
+                  properties: {
+                    tagGroup: "",
+                    multi: false,
+                  }
+                }
+              },
               tags: {
                 title: "Tags",
                 type: "string",
