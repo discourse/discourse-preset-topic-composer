@@ -3,7 +3,9 @@ en:
     admin:
       site_settings:
         categories:
-          TODO_plugin_name: "Plugin Name"
+          discourse_preset_topic_composer: "Preset topic composer"
+        button_types: "description: Launch the editor to define various `new topic` buttons"
+
   js:
-    discourse_plugin_name:
+    discourse_preset_topic_composer:
       placeholder: placeholder
