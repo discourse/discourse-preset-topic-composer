@@ -19,22 +19,21 @@ export default DropdownSelectBoxComponent.extend({
 
   content: computed("new-topic", function () {
     const buttons = JSON.parse(this.siteSettings.button_types) || [];
-    const currentUserGroups = this.currentUser?.groups?.flatMap((group) => group.name);
+    const currentUserGroups = this.currentUser?.groups?.flatMap(
+      (group) => group.name
+    );
 
-    const available_buttons = [];
-    buttons.forEach((button) => {
-      if (button.access.trim().length > 0) {
-        button.access.trim().split(/(?:,|\s)\s*/).filter((allowed_group) => {
-          if (currentUserGroups.includes(allowed_group.trim())) {
-            available_buttons.push(button);
-          }
-        });
+    return buttons.filter((button) => {
+      const trimmedAccess = button.access.trim();
+      if (trimmedAccess.length === 0) {
+        return true;
       }
-      else {
-        available_buttons.push(button);
-      }
+
+      const allowedGroups = trimmedAccess.split(/(?:,|\s)\s*/);
+      return allowedGroups.some((group) =>
+        currentUserGroups.includes(group.trim())
+      );
     });
-    return available_buttons;
   }),
 
   actions: {
@@ -42,8 +41,11 @@ export default DropdownSelectBoxComponent.extend({
       const composerController = getOwner(this).lookup("controller:composer");
 
       const buttons = JSON.parse(this.siteSettings.button_types);
-      const selectedButton = buttons.find((button) => button.id === selectedAction);
-      const selectedButtonCategoryId = selectedButton.categoryId > 0 ? selectedButton.categoryId : null;
+      const selectedButton = buttons.find(
+        (button) => button.id === selectedAction
+      );
+      const selectedButtonCategoryId =
+        selectedButton.categoryId > 0 ? selectedButton.categoryId : null;
 
       const options = {
         action: Composer.CREATE_TOPIC,
@@ -54,5 +56,5 @@ export default DropdownSelectBoxComponent.extend({
 
       composerController.open(options);
     },
-  }
+  },
 });
