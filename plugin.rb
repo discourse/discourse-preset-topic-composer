@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# name: discourse-preset-topic-composer
-# about: add presets to your new topic button
+# name: discourse-plugin-name
+# about: TODO
 # meta_topic_id: TODO
 # version: 0.0.1
 # authors: Discourse
@@ -10,12 +10,11 @@
 
 enabled_site_setting :plugin_name_enabled
 
-module ::DiscoursePresetTopicComposer
-  PLUGIN_NAME = "discourse-preset-topic-composer"
+module ::MyPluginModule
+  PLUGIN_NAME = "discourse-plugin-name"
 end
 
-require_relative "lib/discourse_preset_topic_composer/engine"
-register_asset "stylesheets/common/common.scss"
+require_relative "lib/my_plugin_module/engine"
 
 after_initialize do
   # Code which should run after Rails has finished booting
