@@ -1,1 +1,3 @@
 en:
+  button_types:
+    description: Launch the editor to define various "new topic" buttons
