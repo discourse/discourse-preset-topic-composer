@@ -1,12 +1,13 @@
 import { computed } from "@ember/object";
+import { getOwner } from "@ember/owner";
 import { inject as service } from "@ember/service";
 import Composer from "discourse/models/composer";
-import { getOwner } from "discourse-common/lib/get-owner";
 import DropdownSelectBoxComponent from "select-kit/components/dropdown-select-box";
 
 export default DropdownSelectBoxComponent.extend({
   classNames: ["new-topic-dropdown"],
   siteSettings: service(),
+  historyStore: service(),
 
   selectKitOptions: {
     icon: "plus",
@@ -44,6 +45,9 @@ export default DropdownSelectBoxComponent.extend({
       const selectedButton = buttons.find(
         (button) => button.id === selectedAction
       );
+
+      this.historyStore.set("newTopicButtonOptions", selectedButton);
+
       const selectedButtonCategoryId =
         selectedButton.categoryId > 0 ? selectedButton.categoryId : null;
 

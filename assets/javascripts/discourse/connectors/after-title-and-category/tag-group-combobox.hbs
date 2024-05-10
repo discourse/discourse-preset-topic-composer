@@ -1,0 +1,13 @@
+{{#if currentUser}}
+
+  {{#each this.tagGroupList as |tagGroup|}}
+    <div>
+      Tag group name:
+      {{tagGroup.tagGroup}}
+    </div>
+
+    {{tag-group-combobox}}
+
+  {{/each}}
+
+{{/if}}

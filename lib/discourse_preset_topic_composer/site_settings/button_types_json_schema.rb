@@ -47,10 +47,18 @@ module DiscoursePresetTopicComposer
                 items: {
                   type: "object",
                   properties: {
-                    tagGroup: "",
-                    multi: false,
-                  }
-                }
+                    tagGroup: {
+                      title: "Tag group",
+                      type: "string",
+                      description: "i.e. tag group name",
+                    },
+                    multi: {
+                      title: "Multiple tags",
+                      type: "boolean",
+                      description: "Allow multiple tags from this group.",
+                    },
+                  },
+                },
               },
               tags: {
                 title: "Tags",
