@@ -1,4 +1,3 @@
-
 import { tracked } from "@glimmer/tracking";
 import { inject as service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
@@ -6,6 +5,7 @@ import { ajax } from "discourse/lib/ajax";
 export const tagGroupOptions = {
   siteSettings: service(),
   historyStore: service(),
+  appEvents: service(),
 
   selectKitOptions: {
     filterable: true,
@@ -22,8 +22,19 @@ export const tagGroupOptions = {
   value: tracked({ value: null }),
   tagGroupOption: tracked({ value: null }),
   actions: {
-    onChange(selectedAction) {
-      this.value = selectedAction;
+    onChange(tagId) {
+      this.value = tagId;
+
+      const getTagById = (id) => this.content.find((tag) => tag.id === id);
+      if (typeof tagId === "number") {
+        this.composer.tagGroups[this.tagGroupOption.tagGroup] = [
+          getTagById(tagId).name,
+        ];
+      } else {
+        this.composer.tagGroups[this.tagGroupOption.tagGroup] = tagId.map(
+          (tag) => getTagById(tag).name
+        );
+      }
     },
   },
 };

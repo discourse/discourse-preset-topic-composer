@@ -6,6 +6,6 @@ export default Component.extend({
 
   get tagGroupList() {
     const selectedButton = this.historyStore.get("newTopicButtonOptions");
-    return selectedButton.tagGroups || [];
+    return selectedButton?.tagGroups || [];
   },
 });

@@ -5,9 +5,9 @@
       {{tagGroupOption.tagGroup}}:
     </div>
     {{#if tagGroupOption.multi }}
-      {{tag-group-multiselect tagGroupOption=tagGroupOption}}
+      {{tag-group-multiselect tagGroupOption=tagGroupOption composer=@outletArgs.model}}
     {{else}}
-      {{tag-group-combobox tagGroupOption=tagGroupOption}}
+      {{tag-group-combobox tagGroupOption=tagGroupOption composer=@outletArgs.model}}
     {{/if}}
   {{/each}}
 

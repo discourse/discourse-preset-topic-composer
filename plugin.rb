@@ -18,5 +18,8 @@ require_relative "lib/discourse_preset_topic_composer/engine"
 register_asset "stylesheets/common/common.scss"
 
 after_initialize do
-  # Code which should run after Rails has finished booting
+  add_permitted_post_create_param('tag_groups')
+  DiscourseEvent.on(:post_created) do |post, opts, user|
+      # iterate tag groups and throw that into the the post?
+  end
 end
