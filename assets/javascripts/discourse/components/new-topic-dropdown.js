@@ -51,11 +51,12 @@ export default DropdownSelectBoxComponent.extend({
       const selectedButtonCategoryId =
         selectedButton.categoryId > 0 ? selectedButton.categoryId : null;
 
+      const tags = selectedButton.tags.split(/(?:,|\s)\s*/).filter(Boolean); // remove [''] from tags;
       const options = {
         action: Composer.CREATE_TOPIC,
         draftKey: Composer.NEW_TOPIC_KEY,
         categoryId: selectedButtonCategoryId ?? this.category?.id ?? null,
-        tags: selectedButton.tags.split(/(?:,|\s)\s*/) ?? null,
+        tags,
       };
 
       composerController.open(options);

@@ -1,13 +1,14 @@
 {{#if currentUser}}
 
-  {{#each this.tagGroupList as |tagGroup|}}
+  {{#each this.tagGroupList as |tagGroupOption|}}
     <div>
-      Tag group name:
-      {{tagGroup.tagGroup}}
+      {{tagGroupOption.tagGroup}}:
     </div>
-
-    {{tag-group-combobox}}
-
+    {{#if tagGroupOption.multi }}
+      {{tag-group-multiselect tagGroupOption=tagGroupOption}}
+    {{else}}
+      {{tag-group-combobox tagGroupOption=tagGroupOption}}
+    {{/if}}
   {{/each}}
 
 {{/if}}
