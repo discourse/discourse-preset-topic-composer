@@ -5,6 +5,7 @@ import Composer from "discourse/models/composer";
 import DropdownSelectBoxComponent from "select-kit/components/dropdown-select-box";
 
 export default DropdownSelectBoxComponent.extend({
+  id: "new-topic-preset-dropdown",
   classNames: ["new-topic-dropdown"],
   siteSettings: service(),
   historyStore: service(),
