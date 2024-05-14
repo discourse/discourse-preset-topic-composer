@@ -27,11 +27,11 @@ export const tagGroupOptions = {
 
       const getTagById = (id) => this.content.find((tag) => tag.id === id);
       if (typeof tagId === "number") {
-        this.composer.tagGroups[this.tagGroupOption.tagGroup] = [
+        this.composer.tag_groups[this.tagGroupOption.tagGroup] = [
           getTagById(tagId).name,
         ];
       } else {
-        this.composer.tagGroups[this.tagGroupOption.tagGroup] = tagId.map(
+        this.composer.tag_groups[this.tagGroupOption.tagGroup] = tagId.map(
           (tag) => getTagById(tag).name
         );
       }
