@@ -1,11 +1,16 @@
 en:
+  site_settings:
+   button_types: "Launch the editor to define various `new topic` buttons"
+   discourse_preset_topic_composer_enabled: "Enable preset topic composer"
+
   admin_js:
     admin:
       site_settings:
         categories:
           discourse_preset_topic_composer: "Preset topic composer"
-        button_types: "description: Launch the editor to define various `new topic` buttons"
 
   js:
     discourse_preset_topic_composer:
       placeholder: placeholder
+    composer:
+      select: "Select..."

@@ -17,3 +17,15 @@ body.category[style*="--category-color"] .new-topic-dropdown .btn {
     $hover-icon-color: var(--category-text-color)
   );
 }
+
+.tag-group-input {
+  width: 100% !important;
+  margin-bottom: 8px;
+  max-width: calc(50% - 4px);
+}
+.tag-group_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}

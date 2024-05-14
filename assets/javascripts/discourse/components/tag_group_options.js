@@ -3,12 +3,15 @@ import { inject as service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 
 export const tagGroupOptions = {
+  classNames: ["tag-group-input"],
+
   siteSettings: service(),
   historyStore: service(),
   appEvents: service(),
 
   selectKitOptions: {
     filterable: true,
+    none: "composer.select",
   },
 
   init() {

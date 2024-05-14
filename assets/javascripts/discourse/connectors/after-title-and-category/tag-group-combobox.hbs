@@ -1,9 +1,6 @@
 {{#if currentUser}}
 
   {{#each this.tagGroupList as |tagGroupOption|}}
-    <div>
-      {{tagGroupOption.tagGroup}}:
-    </div>
     {{#if tagGroupOption.multi }}
       {{tag-group-multiselect tagGroupOption=tagGroupOption composer=@outletArgs.model}}
     {{else}}
