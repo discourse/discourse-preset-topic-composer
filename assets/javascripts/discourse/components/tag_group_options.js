@@ -9,32 +9,33 @@ export const tagGroupOptions = {
   historyStore: service(),
   appEvents: service(),
 
-  selectKitOptions: {
-    filterable: true,
-    none: "composer.select",
-  },
 
   init() {
     this._super(...arguments);
     ajax(
-      `topic_composer/tag_by_tag_group/${this.tagGroupOption.tagGroup}.json`
+      `topic_composer/tag_by_tag_group/${this.tagGroupName}.json`
     ).then((result) => (this.content = result.tags));
+    for (const option of this.selectKitOptions) {
+      if ("translatedNone" in option) {
+        option.translatedNone = this.tagGroupName;
+      }
+    }
   },
 
   content: tracked({ value: [] }),
   value: tracked({ value: null }),
-  tagGroupOption: tracked({ value: null }),
+  tagGroupName: tracked({ value: null }),
   actions: {
     onChange(tagId) {
       this.value = tagId;
 
       const getTagById = (id) => this.content.find((tag) => tag.id === id);
       if (typeof tagId === "number") {
-        this.composer.tag_groups[this.tagGroupOption.tagGroup] = [
+        this.composer.tag_groups[this.tagGroupName] = [
           getTagById(tagId).name,
         ];
       } else {
-        this.composer.tag_groups[this.tagGroupOption.tagGroup] = tagId.map(
+        this.composer.tag_groups[this.tagGroupName] = tagId.map(
           (tag) => getTagById(tag).name
         );
       }

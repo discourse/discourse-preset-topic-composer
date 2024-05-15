@@ -13,4 +13,4 @@ en:
     discourse_preset_topic_composer:
       placeholder: placeholder
     composer:
-      select: "Select..."
+      select: "%{tag_group_name}"

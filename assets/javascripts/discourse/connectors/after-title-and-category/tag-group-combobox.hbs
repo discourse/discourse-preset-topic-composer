@@ -2,9 +2,9 @@
 
   {{#each this.tagGroupList as |tagGroupOption|}}
     {{#if tagGroupOption.multi }}
-      {{tag-group-multiselect tagGroupOption=tagGroupOption composer=@outletArgs.model}}
+      {{tag-group-multiselect composer=@outletArgs.model tagGroupName=tagGroupOption.tagGroup}}
     {{else}}
-      {{tag-group-combobox tagGroupOption=tagGroupOption composer=@outletArgs.model}}
+      {{tag-group-combobox composer=@outletArgs.model tagGroupName=tagGroupOption.tagGroup}}
     {{/if}}
   {{/each}}
 

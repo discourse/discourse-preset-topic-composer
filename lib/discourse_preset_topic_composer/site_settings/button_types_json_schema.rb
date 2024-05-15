@@ -70,6 +70,11 @@ module DiscoursePresetTopicComposer
                   },
                 },
               },
+              showTags: {
+                title: "Show tags",
+                type: "boolean",
+                description: "Show tags input field.",
+              },
               access: {
                 title: "Who can create",
                 type: "string",
