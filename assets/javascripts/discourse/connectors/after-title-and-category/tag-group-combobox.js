@@ -17,4 +17,11 @@ export default Component.extend({
     const selectedButton = this.historyStore.get("newTopicButtonOptions");
     return selectedButton?.tagGroups || [];
   },
+
+  willDestroyElement() {
+    this._super(...arguments);
+    const composerHTML = document.querySelector(".composer-fields");
+    composerHTML.classList.remove("hide-tag");
+    this.historyStore.set("newTopicButtonOptions", null);
+  },
 });

@@ -4,11 +4,19 @@ import { ajax } from "discourse/lib/ajax";
 
 export const tagGroupOptions = {
   classNames: ["tag-group-input"],
-
+  classNameBindings: ["isInvalid:invalid"],
   siteSettings: service(),
   historyStore: service(),
   appEvents: service(),
 
+  content: tracked({ value: [] }),
+  value: tracked({ value: null }),
+  tagGroupName: tracked({ value: null }),
+  isInvalid: tracked({ value: false }),
+
+  selectKitOptions: {
+    filterable: true,
+  },
 
   init() {
     this._super(...arguments);
@@ -20,22 +28,29 @@ export const tagGroupOptions = {
         option.translatedNone = this.tagGroupName;
       }
     }
+    this.composer.tag_groups[this.tagGroupName] = {
+      value: [],
+      component: this
+    };
   },
 
-  content: tracked({ value: [] }),
-  value: tracked({ value: null }),
-  tagGroupName: tracked({ value: null }),
+
+  invalidate() {
+    this.isInvalid = true;
+  },
+
   actions: {
     onChange(tagId) {
       this.value = tagId;
+      this.isInvalid = false;
 
       const getTagById = (id) => this.content.find((tag) => tag.id === id);
       if (typeof tagId === "number") {
-        this.composer.tag_groups[this.tagGroupName] = [
+        this.composer.tag_groups[this.tagGroupName].value = [
           getTagById(tagId).name,
         ];
       } else {
-        this.composer.tag_groups[this.tagGroupName] = tagId.map(
+        this.composer.tag_groups[this.tagGroupName].value = tagId.map(
           (tag) => getTagById(tag).name
         );
       }

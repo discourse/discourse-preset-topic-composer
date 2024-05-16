@@ -57,6 +57,11 @@ module DiscoursePresetTopicComposer
                       type: "boolean",
                       description: "Allow multiple tags from this group.",
                     },
+                    required: {
+                      title: "Required",
+                      type: "boolean",
+                      description: "Require at least one tag from this group.",
+                    }
                   },
                 },
               },
