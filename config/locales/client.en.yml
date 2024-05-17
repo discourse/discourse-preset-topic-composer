@@ -13,6 +13,6 @@ en:
     discourse_preset_topic_composer:
       placeholder: placeholder
     composer:
-      error_message: "Please select an “%{tag_group_name}” for this topic."
+      select: "%{tag_group_name}"
     dialog:
       error_message: "Please fill required fields"
