@@ -4,7 +4,7 @@ import { ajax } from "discourse/lib/ajax";
 
 export const tagGroupOptions = {
   classNames: ["tag-group-input"],
-  classNameBindings: ["isInvalid:invalid"],
+  classNameBindings: ["isInvalid:tag-group-input--invalid"],
   siteSettings: service(),
   historyStore: service(),
   appEvents: service(),
