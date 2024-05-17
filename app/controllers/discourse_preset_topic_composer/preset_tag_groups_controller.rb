@@ -6,7 +6,7 @@ module ::DiscoursePresetTopicComposer
 
     def search_tags_by_tag_group
       tag_group = params[:tag_group]
-      tags = TagGroup.find_by(name: tag_group)&.tags || []
+      tags = TagGroup.visible(guardian).find_by(name: tag_group)&.tags || []
       render json: { tags: tags }
     end
   end
