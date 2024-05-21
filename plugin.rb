@@ -18,9 +18,9 @@ require_relative "lib/discourse_preset_topic_composer/engine"
 register_asset "stylesheets/common/common.scss"
 
 after_initialize do
-  add_permitted_post_create_param("tag_groups", :hash)
+  add_permitted_post_create_param("tags_to_add", :hash)
   on(:topic_created) do |topic, opts, user|
-    tag_groups = opts[:tag_groups]
+    tag_groups = opts[:tags_to_add]
     next unless tag_groups
     tag_groups.each do |tag_group_name, tags|
       tags.each do |tag|

@@ -5,11 +5,12 @@ import I18n from "I18n";
 export default {
   name: "preset-topic-composer-initializer",
   initialize() {
-    Composer.serializeOnCreate("tag_groups");
+    Composer.serializeOnCreate("tags_to_add");
     withPluginApi("0.8.12", (api) => {
       api.modifyClass("model:composer", {
         pluginId: "preset-topic-composer-initializer",
         tag_groups: {},
+        tags_to_add: {},
       });
       api.composerBeforeSave(() => {
         return new Promise((ok, notOk) => {
@@ -20,35 +21,22 @@ export default {
             return ok();
           }
 
-          const requiredTagGroups = selectedButton.tagGroups.filter(
-            (tagGroup) => tagGroup?.required
-          );
-
-          if (requiredTagGroups.length === 0) {
-            return ok();
-          }
-
           const composerModel = api.container.lookup("model:composer");
-          const filledTagGroups = composerModel.tag_groups;
-
-          let missingTagGroupsNames = [];
-          for (const { tagGroup: name } of requiredTagGroups) {
-            if (filledTagGroups[name].value.length > 0) {
-              continue; // tag group is filled and has _something_ in it
-            } else {
-              missingTagGroupsNames.push(filledTagGroups[name]);
+          let invalidInputs = [];
+          for (const tagGroupInput of Object.values(composerModel.tag_groups)) {
+            const isValid = tagGroupInput.component.validate();
+            if (!isValid) {
+              invalidInputs.push(tagGroupInput.component.tagGroupName);
             }
           }
-          if (missingTagGroupsNames.length > 0) {
-            for (const tagGroup of missingTagGroupsNames) {
-              tagGroup.component.invalidate();
-            }
+
+          if (invalidInputs.length > 0) {
             const dialog = api.container.lookup("service:dialog");
             dialog.alert(I18n.t("dialog.error_message"));
             return notOk();
           }
 
-          ok();
+          return ok();
         });
       });
     });
