@@ -61,7 +61,7 @@ module DiscoursePresetTopicComposer
                       title: "Required",
                       type: "boolean",
                       description: "Require at least one tag from this group.",
-                    }
+                    },
                   },
                 },
               },
