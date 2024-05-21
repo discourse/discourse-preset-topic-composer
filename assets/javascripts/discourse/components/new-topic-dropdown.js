@@ -1,12 +1,13 @@
 import { computed } from "@ember/object";
+import { getOwner } from "@ember/owner";
 import { inject as service } from "@ember/service";
 import Composer from "discourse/models/composer";
-import { getOwner } from "discourse-common/lib/get-owner";
 import DropdownSelectBoxComponent from "select-kit/components/dropdown-select-box";
 
 export default DropdownSelectBoxComponent.extend({
   classNames: ["new-topic-dropdown"],
   siteSettings: service(),
+  historyStore: service(),
 
   selectKitOptions: {
     icon: "plus",
@@ -39,19 +40,22 @@ export default DropdownSelectBoxComponent.extend({
   actions: {
     onChange(selectedAction) {
       const composerController = getOwner(this).lookup("controller:composer");
-
       const buttons = JSON.parse(this.siteSettings.button_types);
       const selectedButton = buttons.find(
         (button) => button.id === selectedAction
       );
+
+      this.historyStore.set("newTopicButtonOptions", selectedButton);
+
       const selectedButtonCategoryId =
         selectedButton.categoryId > 0 ? selectedButton.categoryId : null;
 
+      const tags = selectedButton.tags.split(/(?:,|\s)\s*/).filter(Boolean); // remove [''] from tags;
       const options = {
         action: Composer.CREATE_TOPIC,
         draftKey: Composer.NEW_TOPIC_KEY,
         categoryId: selectedButtonCategoryId ?? this.category?.id ?? null,
-        tags: selectedButton.tags.split(/(?:,|\s)\s*/) ?? null,
+        tags,
       };
 
       composerController.open(options);

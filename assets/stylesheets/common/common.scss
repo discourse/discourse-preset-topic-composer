@@ -5,6 +5,19 @@
   display: none !important;
 }
 
+.hide-tag {
+  // Hide the original tags button.
+  .mini-tag-chooser {
+    display: none !important;
+    width: 0 !important;
+    max-width: 0 !important;
+    margin: 0 !important;
+  }
+  .category-input {
+    max-width: 100% !important;
+  }
+}
+
 // Support "Colorful categories" component.
 // @see https://github.com/discourse/discourse-colorful-categories/blob/02b0789c1fe88922d23b2d0ee4c5a326dfe95c19/common/common.scss#L112-L136
 body.category[style*="--category-color"] .new-topic-dropdown .btn {
@@ -16,4 +29,21 @@ body.category[style*="--category-color"] .new-topic-dropdown .btn {
     $hover-bg-color: var(--category-color),
     $hover-icon-color: var(--category-text-color)
   );
+}
+
+.tag-group-input {
+  width: 100% !important;
+  margin-bottom: 8px;
+  max-width: calc(50% - 4px);
+}
+.tag-group-input--invalid {
+  .select-kit-header {
+    border: 1px solid var(--danger) !important;
+  }
+}
+.tag-group_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }

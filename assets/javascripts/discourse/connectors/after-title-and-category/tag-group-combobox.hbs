@@ -1,0 +1,19 @@
+{{#if this.currentUser.can_create_topic}}
+
+  {{#each this.tagGroupList as |tagGroupOption|}}
+    {{#if tagGroupOption.multi}}
+      {{tag-group-multiselect
+        composer=@outletArgs.model
+        tagGroupName=tagGroupOption.tagGroup
+        required=tagGroupOption.required
+      }}
+    {{else}}
+      {{tag-group-combobox
+        composer=@outletArgs.model
+        tagGroupName=tagGroupOption.tagGroup
+        required=tagGroupOption.required
+      }}
+    {{/if}}
+  {{/each}}
+
+{{/if}}

@@ -40,6 +40,31 @@ module DiscoursePresetTopicComposer
                   "Enter the category ID this topic should be created in. Set to 0 to enable all categories.",
                 minimum: 0,
               },
+              tagGroups: {
+                title: "Tag group dropdowns",
+                type: "array",
+                uniqueItems: true,
+                items: {
+                  type: "object",
+                  properties: {
+                    tagGroup: {
+                      title: "Tag group",
+                      type: "string",
+                      description: "i.e. tag group name",
+                    },
+                    multi: {
+                      title: "Multiple tags",
+                      type: "boolean",
+                      description: "Allow multiple tags from this group.",
+                    },
+                    required: {
+                      title: "Required",
+                      type: "boolean",
+                      description: "Require at least one tag from this group.",
+                    },
+                  },
+                },
+              },
               tags: {
                 title: "Tags",
                 type: "string",
@@ -49,6 +74,11 @@ module DiscoursePresetTopicComposer
                     placeholder: "tag1, tag2, tag3",
                   },
                 },
+              },
+              showTags: {
+                title: "Show tags",
+                type: "boolean",
+                description: "Show tags input field.",
               },
               access: {
                 title: "Who can create",

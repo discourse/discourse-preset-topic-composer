@@ -1,5 +1,5 @@
 discourse_preset_topic_composer:
-  plugin_name_enabled:
+  discourse_preset_topic_composer_enabled:
     default: false
     client: true
   button_types:
