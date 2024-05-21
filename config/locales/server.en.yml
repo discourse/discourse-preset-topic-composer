@@ -1,3 +1,5 @@
 en:
   discourse_preset_topic_composer_enabled: "Enable preset topic composer"
   button_types: Launch the editor to define various "new topic" buttons
+  dialog:
+      error_message: "Please fill required fields"

@@ -1,4 +1,4 @@
-{{#if currentUser}}
+{{#if this.currentUser.can_create_topic}}
 
   {{#each this.tagGroupList as |tagGroupOption|}}
     {{#if tagGroupOption.multi}}

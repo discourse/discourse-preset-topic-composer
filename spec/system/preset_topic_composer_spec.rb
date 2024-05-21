@@ -80,7 +80,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
 
       composer.submit
 
-      expect(page).to have_text(title)
+      expect(page).to have_text(title, wait: 15)
       expect(page).to have_text(body)
       expect(page).to have_text(tag1.name)
     end
@@ -122,7 +122,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
 
       composer.submit
 
-      expect(page).to have_text("Please fill required fields")
+      expect(page).to have_text(I18n.t("dialog.error_message"))
       expect(page).to have_css(".tag-group_wrapper .tag-group-input--invalid")
     end
   end

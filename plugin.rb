@@ -21,10 +21,11 @@ after_initialize do
   add_permitted_post_create_param("tags_to_add", :hash)
   on(:topic_created) do |topic, opts, user|
     tag_groups = opts[:tags_to_add]
+    guardian = Guardian.new(user)
     next unless tag_groups
     tag_groups.each do |tag_group_name, tags|
       tags.each do |tag|
-        tag = Tag.find_by(name: tag)
+        tag = Tag.visible(guardian).find_by(name: tag)
         next unless tag
         topic.tags << tag
       end
