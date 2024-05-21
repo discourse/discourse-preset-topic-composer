@@ -1,5 +1,7 @@
-# **Plugin Name** Plugin
+# discourse-preset-topic-composer Plugin
 
-**Plugin Summary**
+## Summary
 
-For more information, please see: **url to meta topic**
+Add presets to your new topic button
+
+
