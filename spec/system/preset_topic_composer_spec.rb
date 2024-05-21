@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-RSpec.describe "Preset Topic Composer | preset topic creation", type: :system  do
+RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
   let!(:admin) { Fabricate(:admin, name: "Admin") }
   let(:composer) { PageObjects::Components::Composer.new }
   fab!(:tag1) { Fabricate(:tag, name: "tag1") }
   fab!(:tag2) { Fabricate(:tag, name: "tag2") }
   fab!(:tag3) { Fabricate(:tag, name: "tag3") }
-  fab!(:cat) { Fabricate(:category)}
+  fab!(:cat) { Fabricate(:category) }
   fab!(:tag_group) { Fabricate(:tag_group, tags: [tag1, tag2, tag3]) }
 
   before do
@@ -20,16 +20,10 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system  d
       "name" => "New Question2",
       "description" => "Ask a new question in selected category.",
       "categoryId" => cat.id,
-      "tagGroups" => [
-        {
-          "tagGroup" => tag_group.name,
-          "multi" => false,
-          "required" => false
-        }
-      ],
+      "tagGroups" => [{ "tagGroup" => tag_group.name, "multi" => false, "required" => false }],
       "showTags" => false,
       "tags" => "",
-      "access" => ""
+      "access" => "",
     }
     SiteSetting.button_types = site_setting.to_json
   end
@@ -45,7 +39,6 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system  d
       composer_title = find(".action-title")
       expect(composer_title).to have_text("Create a new Topic")
     end
-
 
     it "should create a topic with a preset" do
       visit "/"
@@ -65,5 +58,4 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system  d
       expect(page).to have_text(tag1.name)
     end
   end
-
 end

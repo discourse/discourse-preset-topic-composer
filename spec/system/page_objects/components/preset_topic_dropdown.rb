@@ -3,7 +3,6 @@
 module PageObjects
   module Components
     class PresetTopicDropdown < PageObjects::Components::Base
-
       def select(title)
         button.click
         find("li[title='#{title}']").click

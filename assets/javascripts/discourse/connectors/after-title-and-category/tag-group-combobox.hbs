@@ -1,10 +1,18 @@
 {{#if currentUser}}
 
   {{#each this.tagGroupList as |tagGroupOption|}}
-    {{#if tagGroupOption.multi }}
-      {{tag-group-multiselect composer=@outletArgs.model tagGroupName=tagGroupOption.tagGroup required=tagGroupOption.required}}
+    {{#if tagGroupOption.multi}}
+      {{tag-group-multiselect
+        composer=@outletArgs.model
+        tagGroupName=tagGroupOption.tagGroup
+        required=tagGroupOption.required
+      }}
     {{else}}
-      {{tag-group-combobox composer=@outletArgs.model tagGroupName=tagGroupOption.tagGroup required=tagGroupOption.required}}
+      {{tag-group-combobox
+        composer=@outletArgs.model
+        tagGroupName=tagGroupOption.tagGroup
+        required=tagGroupOption.required
+      }}
     {{/if}}
   {{/each}}
 

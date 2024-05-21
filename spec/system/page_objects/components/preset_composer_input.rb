@@ -3,7 +3,6 @@
 module PageObjects
   module Components
     class PresetComposerInput < PageObjects::Components::Base
-
       def select(title)
         input.click
         find("li[title='#{title}']").click

@@ -49,9 +49,7 @@ export const tagGroupOptions = {
 
       const getTagById = (id) => this.content.find((tag) => tag.id === id);
       if (typeof tagId === "number") {
-        this.composer.tags_to_add[this.tagGroupName]  = [
-          getTagById(tagId).name,
-        ];
+        this.composer.tags_to_add[this.tagGroupName] = [getTagById(tagId).name];
       } else {
         this.composer.tags_to_add[this.tagGroupName] = tagId.map(
           (tag) => getTagById(tag).name
