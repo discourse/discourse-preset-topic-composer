@@ -18,33 +18,39 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
     end
   end
 
-
   before do
     SiteSetting.discourse_preset_topic_composer_enabled = true
     sign_in(admin)
 
-     SiteSettingHelper.add_new_json({
-      "id" => "new_question2",
-      "icon" => "question",
-      "name" => "New Question2",
-      "description" => "Ask a new question in selected category.",
-      "categoryId" => cat.id,
-      "tagGroups" => [{ "tagGroup" => tag_group.name, "multi" => false, "required" => false }],
-      "showTags" => false,
-      "tags" => "",
-      "access" => "",
-    })
-    SiteSettingHelper.add_new_json({
-      "id" => "new_question3",
-      "icon" => "question",
-      "name" => "New Question3",
-      "description" => "Ask a new question in selected category.",
-      "categoryId" => cat.id,
-      "tagGroups" => [{ "tagGroup" => tag_group.name, "multi" => false, "required" => false }, { "tagGroup" => tag_group2.name, "multi" => false, "required" => true }],
-      "showTags" => false,
-      "tags" => "",
-      "access" => "",
-    })
+    SiteSettingHelper.add_new_json(
+      {
+        "id" => "new_question2",
+        "icon" => "question",
+        "name" => "New Question2",
+        "description" => "Ask a new question in selected category.",
+        "categoryId" => cat.id,
+        "tagGroups" => [{ "tagGroup" => tag_group.name, "multi" => false, "required" => false }],
+        "showTags" => false,
+        "tags" => "",
+        "access" => "",
+      },
+    )
+    SiteSettingHelper.add_new_json(
+      {
+        "id" => "new_question3",
+        "icon" => "question",
+        "name" => "New Question3",
+        "description" => "Ask a new question in selected category.",
+        "categoryId" => cat.id,
+        "tagGroups" => [
+          { "tagGroup" => tag_group.name, "multi" => false, "required" => false },
+          { "tagGroup" => tag_group2.name, "multi" => false, "required" => true },
+        ],
+        "showTags" => false,
+        "tags" => "",
+        "access" => "",
+      },
+    )
   end
 
   describe "with plugin enabled" do
