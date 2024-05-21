@@ -5,11 +5,9 @@ import I18n from "I18n";
 export default {
   name: "preset-topic-composer-initializer",
   initialize() {
-
     Composer.serializeOnCreate("tags_to_add");
 
     withPluginApi("0.8.12", (api) => {
-
       api.modifyClass("model:composer", {
         pluginId: "preset-topic-composer-initializer",
         tag_groups: {},

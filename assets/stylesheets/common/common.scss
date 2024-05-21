@@ -38,7 +38,7 @@ body.category[style*="--category-color"] .new-topic-dropdown .btn {
 }
 .tag-group-input--invalid {
   .select-kit-header {
-    border: 1px solid red !important;
+    border: 1px solid var(--danger) !important;
   }
 }
 .tag-group_wrapper {
