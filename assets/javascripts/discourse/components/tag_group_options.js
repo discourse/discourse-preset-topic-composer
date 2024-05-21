@@ -26,7 +26,7 @@ export const tagGroupOptions = {
     );
     for (const option of this.selectKitOptions) {
       if ("translatedNone" in option) {
-        option.translatedNone = this.tagGroupName;
+        option.translatedNone = `${this.required ? "*" : ""}${this.tagGroupName}`;
       }
     }
     this.composer.tag_groups[this.tagGroupName] = {
