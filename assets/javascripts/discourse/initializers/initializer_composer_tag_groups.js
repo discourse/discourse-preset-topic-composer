@@ -1,6 +1,5 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
 import Composer from "discourse/models/composer";
-import I18n from "I18n";
 
 export default {
   name: "preset-topic-composer-initializer",

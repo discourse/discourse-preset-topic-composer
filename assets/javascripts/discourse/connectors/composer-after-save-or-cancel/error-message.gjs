@@ -1,6 +1,6 @@
 import Component from "@glimmer/component";
-import { service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
+import { service } from "@ember/service";
 import i18n from "discourse-common/helpers/i18n";
 
 export default class ErrorMessage extends Component {
