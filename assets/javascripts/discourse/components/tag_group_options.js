@@ -24,13 +24,6 @@ export const tagGroupOptions = {
     ajax(`topic_composer/tag_by_tag_group/${this.tagGroupName}.json`).then(
       (result) => (this.content = result.tags)
     );
-    for (const option of this.selectKitOptions) {
-      if ("translatedNone" in option) {
-        option.translatedNone = `${this.required ? "*" : ""}${
-          this.tagGroupName
-        }`;
-      }
-    }
     this.composer.tag_groups[this.tagGroupName] = {
       component: this,
     };

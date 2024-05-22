@@ -6,12 +6,26 @@
         composer=@outletArgs.model
         tagGroupName=tagGroupOption.tagGroup
         required=tagGroupOption.required
+        options=(hash
+          translatedNone=(if
+            tagGroupOption.required
+            (concat "*" tagGroupOption.tagGroup)
+            tagGroupOption.tagGroup
+          )
+        )
       }}
     {{else}}
       {{tag-group-combobox
         composer=@outletArgs.model
         tagGroupName=tagGroupOption.tagGroup
         required=tagGroupOption.required
+        options=(hash
+          translatedNone=(if
+            tagGroupOption.required
+            (concat "*" tagGroupOption.tagGroup)
+            tagGroupOption.tagGroup
+          )
+        )
       }}
     {{/if}}
   {{/each}}

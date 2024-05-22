@@ -13,6 +13,14 @@ module PageObjects
         find("li[title='#{title}']").click
       end
 
+      def get_first_label
+        input.first.find(".name").text
+      end
+
+      def get_last_label
+        input.last.find(".name").text
+      end
+
       def input
         find(".tag-group_wrapper").find_all(".select-kit.combobox.combo-box")
       end
