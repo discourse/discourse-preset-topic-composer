@@ -4,8 +4,8 @@ import { service } from "@ember/service";
 import i18n from "discourse-common/helpers/i18n";
 
 export default class ErrorMessage extends Component {
-  @service i18n;
   @service appEvents;
+
   @tracked shouldShowErrorMessage = false;
 
   constructor() {
