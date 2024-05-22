@@ -13,7 +13,6 @@ export default {
         tag_groups: {},
         tags_to_add: {},
       });
-
       api.composerBeforeSave(() => {
         return new Promise((ok, notOk) => {
           const historyStore = api.container.lookup("service:history-store");
@@ -22,7 +21,6 @@ export default {
           if (!selectedButton?.tagGroups) {
             return ok();
           }
-
           const composerModel = api.container.lookup("model:composer");
           let invalidInputs = [];
           for (const tagGroupInput of Object.values(composerModel.tag_groups)) {
@@ -33,8 +31,8 @@ export default {
           }
 
           if (invalidInputs.length > 0) {
-            const dialog = api.container.lookup("service:dialog");
-            dialog.alert(I18n.t("dialog.error_message"));
+            const appEvents = api.container.lookup("service:app-events");
+            appEvents.trigger("composer:preset-error", { isOk: false });
             return notOk();
           }
 
