@@ -125,5 +125,22 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
       expect(page).to have_text(I18n.t("dialog.error_message"))
       expect(page).to have_css(".tag-group_wrapper .tag-group-input--invalid")
     end
+
+    it "does not change input label if choose category" do
+      visit "/"
+
+      preset_dropdown = PageObjects::Components::PresetTopicDropdown.new
+      preset_dropdown.select("New Question3")
+
+      preset_input = PageObjects::Components::PresetComposerInput.new
+
+      expect(preset_input.get_first_label).to eq(tag_group.name)
+      expect(preset_input.get_last_label).to eq("*#{tag_group2.name}")
+
+      composer.switch_category(cat.name)
+
+      expect(preset_input.get_first_label).to eq(tag_group.name)
+      expect(preset_input.get_last_label).to eq("*#{tag_group2.name}")
+    end
   end
 end

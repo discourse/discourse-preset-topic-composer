@@ -24,16 +24,15 @@ export const tagGroupOptions = {
     ajax(`topic_composer/tag_by_tag_group/${this.tagGroupName}.json`).then(
       (result) => (this.content = result.tags)
     );
-    for (const option of this.selectKitOptions) {
-      if ("translatedNone" in option) {
-        option.translatedNone = `${this.required ? "*" : ""}${
-          this.tagGroupName
-        }`;
-      }
-    }
+
     this.composer.tag_groups[this.tagGroupName] = {
       component: this,
     };
+
+    const selectedButton = this.historyStore.get("newTopicButtonOptions");
+    this.value = selectedButton.tagGroups.find(
+      (tagGroup) => tagGroup?.value && tagGroup.tagGroup === this.tagGroupName
+    )?.value;
   },
   // used by initializer_composer_tag_groups.js
   validate() {
@@ -57,6 +56,15 @@ export const tagGroupOptions = {
           (tag) => getTagById(tag).name
         );
       }
+
+      const selectedButton = this.historyStore.get("newTopicButtonOptions");
+      for (const tagGroup of selectedButton.tagGroups) {
+        if (tagGroup.tagGroup === this.tagGroupName) {
+          tagGroup.value = this.value;
+          break;
+        }
+      }
+      this.historyStore.set("newTopicButtonOptions", selectedButton);
     },
   },
 };
