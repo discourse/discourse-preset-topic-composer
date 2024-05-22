@@ -40,12 +40,13 @@ export default DropdownSelectBoxComponent.extend({
   actions: {
     onChange(selectedAction) {
       const composerController = getOwner(this).lookup("controller:composer");
-      const buttons = JSON.parse(this.siteSettings.button_types);
-      const selectedButton = buttons.find(
-        (button) => button.id === selectedAction
-      );
+      let selectedButton = this.historyStore.get("newTopicButtonOptions");
 
-      this.historyStore.set("newTopicButtonOptions", selectedButton);
+      if (!selectedButton || selectedAction !== selectedButton.id) {
+        const buttons = JSON.parse(this.siteSettings.button_types);
+        selectedButton = buttons.find((button) => button.id === selectedAction);
+        this.historyStore.set("newTopicButtonOptions", selectedButton);
+      }
 
       const selectedButtonCategoryId =
         selectedButton.categoryId > 0 ? selectedButton.categoryId : null;
