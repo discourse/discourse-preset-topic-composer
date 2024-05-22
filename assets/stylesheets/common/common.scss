@@ -47,3 +47,9 @@ body.category[style*="--category-color"] .new-topic-dropdown .btn {
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
+.missing-input-error-message {
+  margin-left: 20px;
+  text-align: left;
+  color: var(--danger);
+}
