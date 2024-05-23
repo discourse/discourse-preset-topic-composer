@@ -13,7 +13,8 @@ discourse_preset_topic_composer:
           "icon": "question",
           "categoryId": 19,
           "tags": "question",
-          "access": ""
+          "access": "",
+          "tagGroups": []
         },
         {
           "id": "NEW_CONVERSATION",
@@ -22,6 +23,7 @@ discourse_preset_topic_composer:
           "icon": "ph-chat-circle",
           "categoryId": 0,
           "tags": "conversation",
+          "tagGroups": [],
           "access": ""
         },
         {
@@ -31,7 +33,8 @@ discourse_preset_topic_composer:
           "icon": "ph-bug",
           "categoryId": 0,
           "tags": "bug",
-          "access": ""
+          "access": "",
+          "tagGroups": []
         },
         {
           "id": "NEW_SHOWCASE",
@@ -40,6 +43,7 @@ discourse_preset_topic_composer:
           "icon": "discourse-sparkles",
           "categoryId": 0,
           "tags": "showcase",
+          "tagGroups": [],
           "access": ""
         },
         {
@@ -49,7 +53,8 @@ discourse_preset_topic_composer:
           "icon": "ph-note-pencil",
           "categoryId": 0,
           "tags": "feedback",
-          "access": ""
+          "access": "",
+          "tagGroups": []
         },
         {
           "id": "NEW_COLLABORATION",
@@ -58,7 +63,8 @@ discourse_preset_topic_composer:
           "icon": "hands-helping",
           "categoryId": 0,
           "tags": "collaboration",
-          "access": ""
+          "access": "",
+          "tagGroups": []
         },
         {
           "id": "NEW_ANNOUNCEMENT",
@@ -67,7 +73,8 @@ discourse_preset_topic_composer:
           "icon": "ph-quotes",
           "categoryId": 0,
           "tags": "announcement",
-          "access": ""
+          "access": "",
+          "tagGroups": []
         },
         {
           "id": "NEW_EVENT",
@@ -76,7 +83,8 @@ discourse_preset_topic_composer:
           "icon": "far-calendar-plus",
           "categoryId": 0,
           "tags": "event",
-          "access": ""
+          "access": "",
+          "tagGroups": []
         }
       ]
     json_schema: DiscoursePresetTopicComposer::SiteSettings::ButtonTypesJsonSchema
