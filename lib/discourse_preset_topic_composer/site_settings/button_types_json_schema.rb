@@ -40,6 +40,27 @@ module DiscoursePresetTopicComposer
                   "Enter the category ID this topic should be created in. Set to 0 to enable all categories.",
                 minimum: 0,
               },
+              tags: {
+                title: "Tags",
+                type: "string",
+                description: "Enter comma, or space separated tags to assign to topic.",
+                options: {
+                  inputAttributes: {
+                    placeholder: "tag1, tag2, tag3",
+                  },
+                },
+              },
+              showTags: {
+                title: "Show tags",
+                type: "boolean",
+                description: "Show tags input field.",
+              },
+              access: {
+                title: "Who can create",
+                type: "string",
+                description:
+                  "Enter comma, or space separated user group names. Only the members of those groups can create this topic. Leave empty to allow all logged-in users.",
+              },
               tagGroups: {
                 title: "Tag group dropdowns",
                 type: "array",
@@ -64,27 +85,6 @@ module DiscoursePresetTopicComposer
                     },
                   },
                 },
-              },
-              tags: {
-                title: "Tags",
-                type: "string",
-                description: "Enter comma, or space separated tags to assign to topic.",
-                options: {
-                  inputAttributes: {
-                    placeholder: "tag1, tag2, tag3",
-                  },
-                },
-              },
-              showTags: {
-                title: "Show tags",
-                type: "boolean",
-                description: "Show tags input field.",
-              },
-              access: {
-                title: "Who can create",
-                type: "string",
-                description:
-                  "Enter comma, or space separated user group names. Only the members of those groups can create this topic. Leave empty to allow all logged-in users.",
               },
             },
           },
