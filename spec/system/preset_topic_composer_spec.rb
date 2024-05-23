@@ -142,5 +142,25 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
       expect(preset_input.get_first_label).to eq(tag_group.name)
       expect(preset_input.get_last_label).to eq("*#{tag_group2.name}")
     end
+
+    it "does keep the tag input when reopening the composer" do
+      visit "/"
+      preset_dropdown = PageObjects::Components::PresetTopicDropdown.new
+      preset_dropdown.select("New Question3")
+
+      preset_input = PageObjects::Components::PresetComposerInput.new
+      preset_input.select_first_with(tag1.name)
+
+      title = "Abc 123 test title!"
+      body = "This is a test body that should work!"
+      composer.fill_title(title)
+      composer.type_content(body)
+
+      composer.minimize
+
+      preset_dropdown.select("New Question3")
+
+      expect(preset_input.get_first_label).to eq(tag1.name)
+    end
   end
 end
