@@ -21,9 +21,11 @@ export const tagGroupOptions = {
 
   init() {
     this._super(...arguments);
-    ajax(`/topic_composer/tag_by_tag_group/${this.tagGroupName}.json`).then(
-      (result) => (this.content = result.tags)
-    );
+    ajax(
+      `/topic_composer/tag_by_tag_group/${encodeURIComponent(
+        this.tagGroupName
+      )}.json`
+    ).then((result) => (this.content = result.tags));
 
     this.composer.tag_groups[this.tagGroupName] = {
       component: this,
