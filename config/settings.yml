@@ -48,7 +48,7 @@ discourse_preset_topic_composer:
           "tags": "showcase",
           "showTags": false,
           "access": "",
-          "tagGroups": [],
+          "tagGroups": []
         },
         {
           "id": "NEW_FEEDBACK",
