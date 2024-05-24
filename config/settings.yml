@@ -13,6 +13,7 @@ discourse_preset_topic_composer:
           "icon": "question",
           "categoryId": 19,
           "tags": "question",
+          "showTags": false,
           "access": "",
           "tagGroups": []
         },
@@ -23,8 +24,9 @@ discourse_preset_topic_composer:
           "icon": "ph-chat-circle",
           "categoryId": 0,
           "tags": "conversation",
-          "tagGroups": [],
-          "access": ""
+          "showTags": false,
+          "access": "",
+          "tagGroups": []
         },
         {
           "id": "NEW_BUG",
@@ -33,6 +35,7 @@ discourse_preset_topic_composer:
           "icon": "ph-bug",
           "categoryId": 0,
           "tags": "bug",
+          "showTags": false,
           "access": "",
           "tagGroups": []
         },
@@ -43,8 +46,9 @@ discourse_preset_topic_composer:
           "icon": "discourse-sparkles",
           "categoryId": 0,
           "tags": "showcase",
+          "showTags": false,
+          "access": "",
           "tagGroups": [],
-          "access": ""
         },
         {
           "id": "NEW_FEEDBACK",
@@ -53,6 +57,7 @@ discourse_preset_topic_composer:
           "icon": "ph-note-pencil",
           "categoryId": 0,
           "tags": "feedback",
+          "showTags": false,
           "access": "",
           "tagGroups": []
         },
@@ -63,6 +68,7 @@ discourse_preset_topic_composer:
           "icon": "hands-helping",
           "categoryId": 0,
           "tags": "collaboration",
+          "showTags": false,
           "access": "",
           "tagGroups": []
         },
@@ -73,6 +79,7 @@ discourse_preset_topic_composer:
           "icon": "ph-quotes",
           "categoryId": 0,
           "tags": "announcement",
+          "showTags": false,
           "access": "",
           "tagGroups": []
         },
@@ -83,6 +90,7 @@ discourse_preset_topic_composer:
           "icon": "far-calendar-plus",
           "categoryId": 0,
           "tags": "event",
+          "showTags": false,
           "access": "",
           "tagGroups": []
         }
