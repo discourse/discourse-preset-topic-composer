@@ -7,7 +7,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
   fab!(:tag2) { Fabricate(:tag, name: "tag2") }
   fab!(:tag3) { Fabricate(:tag, name: "tag3") }
   fab!(:cat) { Fabricate(:category) }
-  fab!(:tag_group) { Fabricate(:tag_group, tags: [tag1, tag2, tag3]) }
+  fab!(:tag_group) { Fabricate(:tag_group, tags: [tag1, tag2, tag3], name: "tag/group0") }
   fab!(:tag_group2) { Fabricate(:tag_group, tags: [tag1, tag2]) }
 
   class SiteSettingHelper
@@ -65,6 +65,18 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
       expect(composer_title).to have_text("Create a new Topic")
     end
 
+
+    it "can fetch a tag group with a / in the name" do
+      visit "/"
+      preset_dropdown = PageObjects::Components::PresetTopicDropdown.new
+      preset_dropdown.select("New Question2")
+
+      preset_input = PageObjects::Components::PresetComposerInput.new
+      preset_input.select_first_with(tag1.name)
+
+      expect(preset_input.get_first_label).to eq(tag1.name)
+    end
+    
     it "should create a topic with a preset" do
       visit "/"
       preset_dropdown = PageObjects::Components::PresetTopicDropdown.new
