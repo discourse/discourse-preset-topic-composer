@@ -3,3 +3,5 @@ en:
   button_types: Launch the editor to define various "new topic" buttons
   dialog:
       error_message: "Please fill required fields"
+  composer:
+      select: "Select "

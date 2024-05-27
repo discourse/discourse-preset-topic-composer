@@ -145,13 +145,13 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
 
       preset_input = PageObjects::Components::PresetComposerInput.new
 
-      expect(preset_input.get_first_label).to eq(tag_group.name)
-      expect(preset_input.get_last_label).to eq("*#{tag_group2.name}")
+      expect(preset_input.get_first_label).to eq(I18n.t("composer.select") + tag_group.name)
+      expect(preset_input.get_last_label).to eq("*" + I18n.t("composer.select") + tag_group2.name)
 
       composer.switch_category(cat.name)
 
-      expect(preset_input.get_first_label).to eq(tag_group.name)
-      expect(preset_input.get_last_label).to eq("*#{tag_group2.name}")
+      expect(preset_input.get_first_label).to eq(I18n.t("composer.select") + tag_group.name)
+      expect(preset_input.get_last_label).to eq("*" + I18n.t("composer.select") + tag_group2.name)
     end
 
     it "does keep the tag input when reopening the composer" do

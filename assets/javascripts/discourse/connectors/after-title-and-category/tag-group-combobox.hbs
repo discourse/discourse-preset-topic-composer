@@ -1,5 +1,4 @@
 {{#if this.currentUser.can_create_topic}}
-
   {{#each this.tagGroupList as |tagGroupOption|}}
     {{#if tagGroupOption.multi}}
       {{tag-group-multiselect
@@ -9,8 +8,8 @@
         options=(hash
           translatedNone=(if
             tagGroupOption.required
-            (concat "*" tagGroupOption.tagGroup)
-            tagGroupOption.tagGroup
+            (concat "*" (i18n "composer.select") tagGroupOption.tagGroup)
+            (concat (i18n "composer.select") tagGroupOption.tagGroup)
           )
         )
       }}
@@ -22,12 +21,11 @@
         options=(hash
           translatedNone=(if
             tagGroupOption.required
-            (concat "*" tagGroupOption.tagGroup)
-            tagGroupOption.tagGroup
+            (concat "*" (i18n "composer.select") tagGroupOption.tagGroup)
+            (concat (i18n "composer.select") tagGroupOption.tagGroup)
           )
         )
       }}
     {{/if}}
   {{/each}}
-
 {{/if}}
