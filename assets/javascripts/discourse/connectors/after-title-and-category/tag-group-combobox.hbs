@@ -9,8 +9,8 @@
         options=(hash
           translatedNone=(if
             tagGroupOption.required
-            (concat "*" tagGroupOption.tagGroup)
-            tagGroupOption.tagGroup
+            (concat "*" (i18n "composer.select") tagGroupOption.tagGroup)
+            (concat (i18n "composer.select") tagGroupOption.tagGroup)
           )
         )
       }}
@@ -21,9 +21,9 @@
         required=tagGroupOption.required
         options=(hash
           translatedNone=(if
-            tagGroupOption.required
-            (concat "*" tagGroupOption.tagGroup)
-            tagGroupOption.tagGroup
+            tagGroupOption.require
+            (concat "*" (i18n "composer.select") tagGroupOption.tagGroup)
+            (concat (i18n "composer.select") tagGroupOption.tagGroup)
           )
         )
       }}
