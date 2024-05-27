@@ -1,5 +1,4 @@
 {{#if this.currentUser.can_create_topic}}
-
   {{#each this.tagGroupList as |tagGroupOption|}}
     {{#if tagGroupOption.multi}}
       {{tag-group-multiselect
@@ -21,7 +20,7 @@
         required=tagGroupOption.required
         options=(hash
           translatedNone=(if
-            tagGroupOption.require
+            tagGroupOption.required
             (concat "*" (i18n "composer.select") tagGroupOption.tagGroup)
             (concat (i18n "composer.select") tagGroupOption.tagGroup)
           )
@@ -29,5 +28,4 @@
       }}
     {{/if}}
   {{/each}}
-
 {{/if}}
