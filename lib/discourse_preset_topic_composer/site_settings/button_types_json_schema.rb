@@ -55,6 +55,7 @@ module DiscoursePresetTopicComposer
                 type: "boolean",
                 description: "Show tags input field.",
                 default: false,
+                format: "checkbox",
               },
               access: {
                 title: "Who can create",
@@ -79,12 +80,14 @@ module DiscoursePresetTopicComposer
                       type: "boolean",
                       description: "Allow multiple tags from this group.",
                       default: false,
+                      format: "checkbox",
                     },
                     required: {
                       title: "Required",
                       type: "boolean",
                       description: "Require at least one tag from this group.",
                       default: false,
+                      format: "checkbox",
                     },
                   },
                 },
