@@ -19,22 +19,7 @@ export default DropdownSelectBoxComponent.extend({
   },
 
   content: computed("new-topic", function () {
-    const buttons = JSON.parse(this.siteSettings.button_types) || [];
-    const currentUserGroups = this.currentUser?.groups?.flatMap(
-      (group) => group.name
-    );
-
-    return buttons.filter((button) => {
-      const trimmedAccess = button.access.trim();
-      if (trimmedAccess.length === 0) {
-        return true;
-      }
-
-      const allowedGroups = trimmedAccess.split(/(?:,|\s)\s*/);
-      return allowedGroups.some((group) =>
-        currentUserGroups.includes(group.trim())
-      );
-    });
+    return this.currentUser.topic_preset_buttons;
   }),
 
   actions: {
