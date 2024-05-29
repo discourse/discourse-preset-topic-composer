@@ -18,6 +18,17 @@ require_relative "lib/discourse_preset_topic_composer/engine"
 register_asset "stylesheets/common/common.scss"
 
 after_initialize do
+  add_to_serializer(:current_user, :topic_preset_buttons) do
+    buttons = JSON.parse(SiteSetting.button_types) || []
+    current_user_groups = scope.user.groups.pluck(:name)
+
+    buttons.select do |button|
+      allowed_groups = button["access"].split(/(?:,|\s)\s*/)
+      allowed_groups.empty? ||
+        allowed_groups.any? { |group| current_user_groups.include?(group.strip) }
+    end
+  end
+
   add_permitted_post_create_param("tags_to_add", :hash)
   on(:topic_created) do |topic, opts, user|
     tag_groups = opts[:tags_to_add]

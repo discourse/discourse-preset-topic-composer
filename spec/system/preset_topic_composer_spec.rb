@@ -48,7 +48,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
         ],
         "showTags" => false,
         "tags" => "",
-        "access" => "",
+        "access" => admin.groups.first.name,
       },
     )
   end
@@ -74,6 +74,23 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
       preset_input.select_first_with(tag1.name)
 
       expect(preset_input.get_first_label).to eq(tag1.name)
+    end
+
+    it "should be able to fetch only visible buttons" do
+      normal_user = Fabricate(:user)
+      sign_in(normal_user)
+      visit "/"
+      preset_dropdown = PageObjects::Components::PresetTopicDropdown.new
+      preset_dropdown.button.click
+      expect(page).not_to have_text("New Question3")
+
+      sign_in(admin)
+
+      visit "/"
+      preset_dropdown = PageObjects::Components::PresetTopicDropdown.new
+      preset_dropdown.button.click
+
+      expect(page).to have_text("New Question3")
     end
 
     it "should create a topic with a preset" do
