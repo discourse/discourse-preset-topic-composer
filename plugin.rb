@@ -24,7 +24,7 @@ after_initialize do
 
     buttons.select do |button|
       allowed_groups = button["access"].split(/(?:,|\s)\s*/)
-      allowed_groups.length == 0 ||
+      allowed_groups.empty? ||
         allowed_groups.any? { |group| current_user_groups.include?(group.strip) }
     end
   end
