@@ -5,9 +5,11 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
   let(:composer) { PageObjects::Components::Composer.new }
   fab!(:tag1) { Fabricate(:tag, name: "tag1") }
   fab!(:tag2) { Fabricate(:tag, name: "tag2") }
-  fab!(:tag3) { Fabricate(:tag, name: "tag3") }
+  fab!(:tag_synonym_for_tag1) { Fabricate(:tag, name: "tag_synonym", target_tag: tag1) }
   fab!(:cat) { Fabricate(:category) }
-  fab!(:tag_group) { Fabricate(:tag_group, tags: [tag1, tag2, tag3], name: "tag/group0") }
+  fab!(:tag_group) do
+    Fabricate(:tag_group, tags: [tag1, tag2, tag_synonym_for_tag1], name: "tag/group0")
+  end
   fab!(:tag_group2) { Fabricate(:tag_group, tags: [tag1, tag2]) }
 
   class SiteSettingHelper
@@ -100,6 +102,26 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
 
       preset_input = PageObjects::Components::PresetComposerInput.new
       preset_input.select_first_with(tag1.name)
+
+      title = "Abc 123 test title!"
+      body = "This is a test body that should work!"
+      composer.fill_title(title)
+      composer.type_content(body)
+
+      composer.submit
+
+      expect(page).to have_text(title, wait: 15)
+      expect(page).to have_text(body)
+      expect(page).to have_text(tag1.name)
+    end
+
+    it "should create a topic with a preset and a tag synonym" do
+      visit "/"
+      preset_dropdown = PageObjects::Components::PresetTopicDropdown.new
+      preset_dropdown.select("New Question2")
+
+      preset_input = PageObjects::Components::PresetComposerInput.new
+      preset_input.select_first_with(tag_synonym_for_tag1.name)
 
       title = "Abc 123 test title!"
       body = "This is a test body that should work!"
