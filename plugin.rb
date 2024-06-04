@@ -37,6 +37,7 @@ after_initialize do
     tag_groups.each do |tag_group_name, tags|
       tags.each do |tag|
         tag = Tag.visible(guardian).find_by(name: tag)
+        tag = Tag.find_by_id(tag.target_tag_id) if tag.synonym?
         next unless tag
         topic.tags << tag
       end
