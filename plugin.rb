@@ -20,12 +20,12 @@ register_asset "stylesheets/common/common.scss"
 after_initialize do
   add_to_serializer(:current_user, :topic_preset_buttons) do
     buttons = JSON.parse(SiteSetting.button_types) || []
-    current_user_groups = scope.user.groups.pluck(:name)
+    current_user = scope.user
 
     buttons.select do |button|
-      allowed_groups = button["access"].split(/(?:,|\s)\s*/)
-      allowed_groups.empty? ||
-        allowed_groups.any? { |group| current_user_groups.include?(group.strip) }
+      allowed_groups = button["access"].split(/(?:,|\s)\s*/).map(&:to_i)
+      allowed_groups = [Group::AUTO_GROUPS[:everyone]] if allowed_groups.empty?
+      current_user.in_any_groups?(allowed_groups)
     end
   end
 
