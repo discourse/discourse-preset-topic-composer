@@ -61,7 +61,7 @@ module DiscoursePresetTopicComposer
                 title: "Who can create",
                 type: "string",
                 description:
-                  "Enter comma, or space separated user group names. Only the members of those groups can create this topic. Leave empty to allow all logged-in users.",
+                  "Enter comma, or space separated user group ids. Only the members of those groups can create this topic. Leave empty to allow all logged-in users.",
               },
               tagGroups: {
                 title: "Tag group dropdowns",

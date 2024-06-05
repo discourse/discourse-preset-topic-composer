@@ -50,7 +50,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
         ],
         "showTags" => false,
         "tags" => "",
-        "access" => admin.groups.first.name,
+        "access" => admin.groups.first.id.to_s,
       },
     )
   end
