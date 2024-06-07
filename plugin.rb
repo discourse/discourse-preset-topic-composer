@@ -2,10 +2,10 @@
 
 # name: discourse-preset-topic-composer
 # about: add presets to your new topic button
-# meta_topic_id: TODO
+# meta_topic_id: 311174
 # version: 0.0.1
 # authors: Discourse
-# url: TODO
+# url: https://github.com/discourse/discourse-preset-topic-composer
 # required_version: 2.7.0
 
 enabled_site_setting :discourse_preset_topic_composer_enabled
