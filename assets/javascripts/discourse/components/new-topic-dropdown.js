@@ -8,6 +8,7 @@ export default DropdownSelectBoxComponent.extend({
   classNames: ["new-topic-dropdown"],
   siteSettings: service(),
   historyStore: service(),
+  router: service(),
 
   selectKitOptions: {
     icon: "plus",
@@ -16,6 +17,33 @@ export default DropdownSelectBoxComponent.extend({
     filterable: false,
     showCaret: true,
     none: "topic.create",
+  },
+
+  getCurrentCategory() {
+    return Number(this.router.currentURL.split("/").at(-1));
+  },
+
+  init() {
+    this._super(...arguments);
+    const isCategoryRoute =
+      this.router.currentRoute.localName === "category" &&
+      this.router.currentURL.startsWith("/c/") &&
+      isNaN(this.getCurrentCategory()) === false;
+
+    if (!isCategoryRoute) {
+      return;
+    }
+
+    const currentCategory = this.getCurrentCategory();
+    const buttonsToHighlight = this.currentUser.topic_preset_buttons.filter(
+      (button) => button.categoryId === currentCategory
+    );
+
+    for (const button of buttonsToHighlight) {
+      // highlight button
+      console.log(button);
+      // document.querySelector(`[data-value="${button.id}"]`).classList.add("is-highlighted");
+    }
   },
 
   content: computed("new-topic", function () {

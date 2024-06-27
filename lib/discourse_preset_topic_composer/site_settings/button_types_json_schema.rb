@@ -37,8 +37,17 @@ module DiscoursePresetTopicComposer
                 title: "Category ID",
                 type: "number",
                 description:
-                  "Enter the category ID this topic should be created in. Set to 0 to enable all categories.",
+                  "Enter the category ID this topic should be created in, it will highlight button if in category. Set to 0 to enable all categories.",
                 minimum: 0,
+              },
+              highlightUrls: {
+                title: "Url patterns to highlight button",
+                type: "array",
+                uniqueItems: true,
+                items: {
+                  type: "string",
+                  description: "Use * as wildcard, i.e. /tag/food* to match all urls that start with /tag/food* or *pizza* to match all urls with pizza in the url.",
+                },
               },
               tags: {
                 title: "Tags",
