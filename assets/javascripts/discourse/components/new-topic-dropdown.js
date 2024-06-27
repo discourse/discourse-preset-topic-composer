@@ -18,32 +18,71 @@ export default DropdownSelectBoxComponent.extend({
     showCaret: true,
     none: "topic.create",
   },
-
-  getCurrentCategory() {
-    return Number(this.router.currentURL.split("/").at(-1));
-  },
-
   init() {
     this._super(...arguments);
-    const isCategoryRoute =
-      this.router.currentRoute.localName === "category" &&
-      this.router.currentURL.startsWith("/c/") &&
-      isNaN(this.getCurrentCategory()) === false;
+    this.highlightButtons();
+  },
 
-    if (!isCategoryRoute) {
-      return;
-    }
+  highlightButtons() {
+    const shouldHighlightByURL = (url) => {
+      // case 1 - url does not contain *, e.g. example, it should match exact url "example"
+      // case 2 - url starts and ends with *, e.g. *example*, it should match any url containing "example"
+      // case 3 - url starts with *, e.g. *example, it should match any url ending with "example"
+      // case 4 - url ends with *, e.g. example*, it should match any url starting with "example"
 
-    const currentCategory = this.getCurrentCategory();
-    const buttonsToHighlight = this.currentUser.topic_preset_buttons.filter(
-      (button) => button.categoryId === currentCategory
-    );
+      const startsWithStar = url.startsWith("*");
+      const endsWithStar = url.endsWith("*");
+      const exactMatch = !startsWithStar && !endsWithStar;
 
-    for (const button of buttonsToHighlight) {
-      // highlight button
-      console.log(button);
-      // document.querySelector(`[data-value="${button.id}"]`).classList.add("is-highlighted");
-    }
+      if (exactMatch) {
+        return url === this.router.currentURL;
+      }
+
+      if (startsWithStar && endsWithStar) {
+        return this.router.currentURL.includes(url.replace(/\*/g, ""));
+      }
+
+      if (startsWithStar) {
+        return this.router.currentURL.endsWith(url.replace(/\*/g, ""));
+      }
+
+      if (endsWithStar) {
+        return this.router.currentURL.startsWith(url.replace(/\*/g, ""));
+      }
+
+      return false;
+    };
+
+    const shouldHighlightByCategoryID = (categoryId) => {
+      const isCategoryRoute =
+        this.router.currentRoute.localName === "category" &&
+        this.router.currentURL.startsWith("/c/");
+      if (!isCategoryRoute) {
+        return false;
+      }
+
+      const currentCategory = Number(this.router.currentURL.split("/").at(-1));
+      if (isNaN(currentCategory)) {
+        return false;
+      }
+
+      return categoryId === currentCategory;
+    };
+
+    this.currentUser.topic_preset_buttons
+      .map((button) => ({
+        ...button,
+        highlightUrls: button.highlightUrls || [],
+      }))
+      .filter(
+        ({ highlightUrls, categoryId }) =>
+          shouldHighlightByCategoryID(categoryId) ||
+          highlightUrls.some(shouldHighlightByURL)
+      )
+      .forEach((button) => {
+        // highlight button
+        console.log(button);
+      });
   },
 
   content: computed("new-topic", function () {
