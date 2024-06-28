@@ -1,4 +1,3 @@
-import { computed } from "@ember/object";
 import { getOwner } from "@ember/owner";
 import { inject as service } from "@ember/service";
 import Composer from "discourse/models/composer";
@@ -9,6 +8,7 @@ export default DropdownSelectBoxComponent.extend({
   siteSettings: service(),
   historyStore: service(),
   router: service(),
+  dropdownButtons: service(),
 
   selectKitOptions: {
     icon: "plus",
@@ -18,72 +18,10 @@ export default DropdownSelectBoxComponent.extend({
     showCaret: true,
     none: "topic.create",
   },
-  init() {
-    this._super(...arguments);
+
+  get content() {
+    return this.dropdownButtons.buttons;
   },
-
-  shouldHighlightByURL(url) {
-    // case 1 - url does not contain *, e.g. example, it should match exact url "example"
-    // case 2 - url starts and ends with *, e.g. *example*, it should match any url containing "example"
-    // case 3 - url starts with *, e.g. *example, it should match any url ending with "example"
-    // case 4 - url ends with *, e.g. example*, it should match any url starting with "example"
-
-    const startsWithStar = url.startsWith("*");
-    const endsWithStar = url.endsWith("*");
-    const exactMatch = !startsWithStar && !endsWithStar;
-
-    if (exactMatch) {
-      return url === this.router.currentURL;
-    }
-
-    if (startsWithStar && endsWithStar) {
-      return this.router.currentURL.includes(url.replace(/\*/g, ""));
-    }
-
-    if (startsWithStar) {
-      return this.router.currentURL.endsWith(url.replace(/\*/g, ""));
-    }
-
-    if (endsWithStar) {
-      return this.router.currentURL.startsWith(url.replace(/\*/g, ""));
-    }
-
-    return false;
-  },
-
-  shouldHighlightByCategoryID(categoryId) {
-    const isCategoryRoute =
-      this.router.currentRoute.localName === "category" &&
-      this.router.currentURL.startsWith("/c/");
-    if (!isCategoryRoute) {
-      return false;
-    }
-
-    const currentCategory = Number(this.router.currentURL.split("/").at(-1));
-    if (isNaN(currentCategory)) {
-      return false;
-    }
-
-    return categoryId === currentCategory;
-  },
-
-  content: computed("new-topic", function () {
-    return this.currentUser.topic_preset_buttons
-      .map((b) => ({
-        ...b,
-        highlightUrls: b.highlightUrls || [],
-      }))
-      .map((button) => {
-        if (
-          this.shouldHighlightByCategoryID(button.categoryId) ||
-          button.highlightUrls.some((url) => this.shouldHighlightByURL(url))
-        ) {
-          button.classNames = "is-highlighted";
-        }
-        return button;
-      });
-  }),
-
   actions: {
     onChange(selectedAction) {
       const composerController = getOwner(this).lookup("controller:composer");
