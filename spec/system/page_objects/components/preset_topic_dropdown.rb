@@ -9,7 +9,10 @@ module PageObjects
       end
 
       def button
-        @button ||= find(".select-kit.single-select.dropdown-select-box .select-kit-header")
+        @button ||=
+          find(".new-topic-dropdown").find(
+            ".select-kit.single-select.dropdown-select-box .select-kit-header",
+          )
       end
     end
   end

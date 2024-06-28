@@ -35,6 +35,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
         "showTags" => false,
         "tags" => "",
         "access" => "",
+        :highlightUrls => %w[/tag/*],
       },
     )
     SiteSettingHelper.add_new_json(
@@ -211,6 +212,25 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
       preset_dropdown.select("New Question3")
 
       expect(preset_input.get_first_label).to eq(tag1.name)
+    end
+
+    it "should add is-highlighted class to the button when in matching url" do
+      visit "/tag/#{tag1.name}"
+      PageObjects::Components::PresetTopicDropdown.new.button.click
+
+      button = find(:css, ".is-highlighted")
+      expect(button).to have_text("New Question2")
+    end
+
+    it "should add is-highlighted class to the button when in categoryId" do
+      visit "/c/#{cat.slug}"
+      PageObjects::Components::PresetTopicDropdown.new.button.click
+
+      button = find("li[title='New Question2']")
+      expect(button[:class]).to include("is-highlighted")
+
+      button = find("li[title='New Question3']")
+      expect(button[:class]).to include("is-highlighted")
     end
   end
 end
