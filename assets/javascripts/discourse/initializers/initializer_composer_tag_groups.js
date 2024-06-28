@@ -7,6 +7,10 @@ export default {
     Composer.serializeOnCreate("tags_to_add");
 
     withPluginApi("0.8.12", (api) => {
+      api.onPageChange(() =>
+        api.container.lookup("service:dropdown-buttons").refreshButtons()
+      );
+
       api.modifyClass("model:composer", {
         pluginId: "preset-topic-composer-initializer",
         tag_groups: {},

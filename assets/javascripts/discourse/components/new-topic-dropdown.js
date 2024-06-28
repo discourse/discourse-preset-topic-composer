@@ -1,4 +1,3 @@
-import { computed } from "@ember/object";
 import { getOwner } from "@ember/owner";
 import { inject as service } from "@ember/service";
 import Composer from "discourse/models/composer";
@@ -8,6 +7,7 @@ export default DropdownSelectBoxComponent.extend({
   classNames: ["new-topic-dropdown"],
   siteSettings: service(),
   historyStore: service(),
+  dropdownButtons: service(),
 
   selectKitOptions: {
     icon: "plus",
@@ -18,10 +18,9 @@ export default DropdownSelectBoxComponent.extend({
     none: "topic.create",
   },
 
-  content: computed("new-topic", function () {
-    return this.currentUser.topic_preset_buttons;
-  }),
-
+  get content() {
+    return this.dropdownButtons.buttons;
+  },
   actions: {
     onChange(selectedAction) {
       const composerController = getOwner(this).lookup("controller:composer");
