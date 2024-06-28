@@ -7,7 +7,6 @@ export default DropdownSelectBoxComponent.extend({
   classNames: ["new-topic-dropdown"],
   siteSettings: service(),
   historyStore: service(),
-  router: service(),
   dropdownButtons: service(),
 
   selectKitOptions: {

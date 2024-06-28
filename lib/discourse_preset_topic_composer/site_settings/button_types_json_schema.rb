@@ -46,7 +46,8 @@ module DiscoursePresetTopicComposer
                 uniqueItems: true,
                 items: {
                   type: "string",
-                  description: "Use * as wildcard, i.e. /tag/food* to match all urls that start with /tag/food* or *pizza* to match all urls with pizza in the url.",
+                  description:
+                    "Use * as wildcard, i.e. /tag/food* to match all urls that start with /tag/food* or *pizza* to match all urls with pizza in the url.",
                 },
               },
               tags: {
