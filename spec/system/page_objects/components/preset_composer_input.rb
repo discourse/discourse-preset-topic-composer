@@ -21,6 +21,11 @@ module PageObjects
         input.last.find(".name").text
       end
 
+      def get_first_list_options
+        input.first.click
+        input.first.find(".select-kit-collection").find_all("li")
+      end
+
       def input
         find(".tag-group_wrapper").find_all(".select-kit.combobox.combo-box")
       end
