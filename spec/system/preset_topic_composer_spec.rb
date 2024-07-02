@@ -245,7 +245,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
 
       SiteSetting.tags_sort_alphabetically = false
       visit "/"
-      
+
       preset_dropdown = PageObjects::Components::PresetTopicDropdown.new
       preset_dropdown.select("New Question2")
       preset_input = PageObjects::Components::PresetComposerInput.new
