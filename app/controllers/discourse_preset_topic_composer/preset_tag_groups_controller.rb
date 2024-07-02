@@ -14,7 +14,7 @@ module ::DiscoursePresetTopicComposer
         tag_order = "public_topic_count DESC"
       end
 
-      tags = TagGroup.visible(guardian).find_by(name: tag_group)&.tags.order(tag_order) || []
+      tags = TagGroup.visible(guardian).find_by(name: tag_group)&.tags&.order(tag_order) || []
       render json: { tags: tags }
     end
   end
