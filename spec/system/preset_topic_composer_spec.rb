@@ -232,5 +232,24 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
       button = find("li[title='New Question3']")
       expect(button[:class]).to include("is-highlighted")
     end
+
+    it "should sort alphabetically if SiteSetting is enabled" do
+      SiteSetting.tags_sort_alphabetically = true
+      Fabricate(:topic, tags: [tag_synonym_for_tag1])
+      visit "/"
+
+      preset_dropdown = PageObjects::Components::PresetTopicDropdown.new
+      preset_dropdown.select("New Question2")
+      preset_input = PageObjects::Components::PresetComposerInput.new
+      expect(preset_input.get_first_list_options.first.text).to eq(tag1.name)
+
+      SiteSetting.tags_sort_alphabetically = false
+      visit "/"
+
+      preset_dropdown = PageObjects::Components::PresetTopicDropdown.new
+      preset_dropdown.select("New Question2")
+      preset_input = PageObjects::Components::PresetComposerInput.new
+      expect(preset_input.get_first_list_options.first.text).to eq(tag_synonym_for_tag1.name)
+    end
   end
 end
