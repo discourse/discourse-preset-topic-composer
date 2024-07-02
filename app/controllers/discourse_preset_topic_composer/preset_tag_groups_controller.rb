@@ -15,7 +15,9 @@ module ::DiscoursePresetTopicComposer
       end
 
       tags = TagGroup.visible(guardian).find_by(name: tag_group)&.tags&.order(tag_order) || []
-      render json: { tags: tags }
+      render json: {
+               tags: ActiveModel::ArraySerializer.new(tags, each_serializer: TagSerializer).as_json,
+             }
     end
   end
 end
