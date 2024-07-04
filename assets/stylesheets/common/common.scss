@@ -53,3 +53,12 @@ body.category[style*="--category-color"] .new-topic-dropdown .btn {
   text-align: left;
   color: var(--danger);
 }
+
+.new-topic-dropdown.select-kit .select-kit-collection {
+  display: flex;
+  flex-direction: column;
+
+  .select-kit-row.is-selected {
+    order: -1;
+  }
+}
