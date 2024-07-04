@@ -214,23 +214,23 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
       expect(preset_input.get_first_label).to eq(tag1.name)
     end
 
-    it "should add is-highlighted class to the button when in matching url" do
+    it "should add is-selected class to the button when in matching url" do
       visit "/tag/#{tag1.name}"
       PageObjects::Components::PresetTopicDropdown.new.button.click
 
-      button = find(:css, ".is-highlighted")
+      button = find(:css, ".is-selected")
       expect(button).to have_text("New Question2")
     end
 
-    it "should add is-highlighted class to the button when in categoryId" do
+    it "should add is-selected class to the button when in categoryId" do
       visit "/c/#{cat.slug}"
       PageObjects::Components::PresetTopicDropdown.new.button.click
 
       button = find("li[title='New Question2']")
-      expect(button[:class]).to include("is-highlighted")
+      expect(button[:class]).to include("is-selected")
 
       button = find("li[title='New Question3']")
-      expect(button[:class]).to include("is-highlighted")
+      expect(button[:class]).to include("is-selected")
     end
 
     it "should sort alphabetically if SiteSetting is enabled" do
