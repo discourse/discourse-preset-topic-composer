@@ -24,7 +24,7 @@ export default class DropdownButtonsService extends Service {
             this.#shouldHighlightByCategoryID(button.categoryId) ||
             button.highlightUrls.some((url) => this.#shouldHighlightByURL(url))
           ) {
-            button.classNames = "is-highlighted";
+            button.classNames = "is-selected";
           }
           return button;
         })
