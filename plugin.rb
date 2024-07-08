@@ -23,7 +23,11 @@ after_initialize do
     current_user = scope.user
 
     buttons.select do |button|
-      allowed_groups = button["access"].split(/(?:,|\s)\s*/).map(&:to_i)
+      allowed_groups =
+        button["access"]
+          .split(/(?:,|\s)\s*/)
+          .map { |group_name| Group.find_by(name: group_name)&.id }
+          .compact
       allowed_groups = [Group::AUTO_GROUPS[:everyone]] if allowed_groups.empty?
       current_user.in_any_groups?(allowed_groups)
     end

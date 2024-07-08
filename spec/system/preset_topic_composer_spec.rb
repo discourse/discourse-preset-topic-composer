@@ -11,7 +11,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
     Fabricate(:tag_group, tags: [tag1, tag2, tag_synonym_for_tag1], name: "tag/group0")
   end
   fab!(:tag_group2) { Fabricate(:tag_group, tags: [tag1, tag2]) }
-
+  fab!(:group)
   class SiteSettingHelper
     def self.add_new_json(json)
       site_setting = JSON.parse SiteSetting.button_types
@@ -23,7 +23,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
   before do
     SiteSetting.discourse_preset_topic_composer_enabled = true
     sign_in(admin)
-
+    group.add(admin)
     SiteSettingHelper.add_new_json(
       {
         "id" => "new_question2",
@@ -51,7 +51,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
         ],
         "showTags" => false,
         "tags" => "",
-        "access" => admin.groups.first.id.to_s,
+        "access" => group.name,
       },
     )
   end
