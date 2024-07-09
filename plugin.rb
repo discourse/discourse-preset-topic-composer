@@ -43,6 +43,7 @@ after_initialize do
         tag = Tag.visible(guardian).find_by(name: tag)
         tag = Tag.find_by_id(tag.target_tag_id) if tag.synonym?
         next unless tag
+        next if topic.tags.exists?(tag.id)
         topic.tags << tag
       end
     end
