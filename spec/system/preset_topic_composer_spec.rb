@@ -249,5 +249,43 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
       preset_input = PageObjects::Components::PresetComposerInput.new
       expect(preset_input.get_first_list_options.first.text).to eq(tag_synonym_for_tag1.name)
     end
+
+    it "should not create a topic with a preset and outside tags" do
+      visit "/"
+      preset_dropdown = PageObjects::Components::PresetTopicDropdown.new
+      preset_dropdown.select("New Question3")
+
+      preset_input = PageObjects::Components::PresetComposerInput.new
+      preset_input.select_first_with(tag1.name)
+      preset_input.select_last_with(tag2.name)
+
+      title = "Abc 123 test title!"
+      body = "This is a test body that should work!"
+      composer.fill_title(title)
+      composer.type_content(body)
+
+      composer.submit
+
+      expect(page).to have_text(title, wait: 15)
+      expect(page).to have_text(body)
+      expect(page).to have_text(tag1.name)
+      expect(page).to have_text(tag2.name)
+      find("img[id='site-logo']").click
+      preset_dropdown = PageObjects::Components::PresetTopicDropdown.new
+      preset_dropdown.select("New Question3")
+      preset_input = PageObjects::Components::PresetComposerInput.new
+      preset_input.select_last_with(tag2.name)
+
+      title = "Abc 123 test title!2"
+      body = "This is a test body that should work!2"
+      composer.fill_title(title)
+      composer.type_content(body)
+
+      composer.submit
+      expect(page).to have_text(title, wait: 15)
+      expect(page).to have_text(body)
+      expect(page).to have_text(tag1.name, count: 2)
+      expect(page).to have_text(tag2.name, count: 3)
+    end
   end
 end
