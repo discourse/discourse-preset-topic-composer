@@ -12,6 +12,7 @@ export const tagGroupOptions = {
   content: tracked({ value: [] }),
   value: tracked({ value: null }),
   tagGroupName: tracked({ value: null }),
+  composer: tracked({ value: {} }),
   isInvalid: tracked({ value: false }),
   required: tracked({ value: false }),
 
@@ -30,11 +31,15 @@ export const tagGroupOptions = {
     this.composer.tag_groups[this.tagGroupName] = {
       component: this,
     };
-
     const selectedButton = this.historyStore.get("newTopicButtonOptions");
     this.value = selectedButton.tagGroups.find(
       (tagGroup) => tagGroup?.value && tagGroup.tagGroup === this.tagGroupName
     )?.value;
+
+    this.appEvents.on("composer:created-post", () => {
+      delete this.composer.tags_to_add[this.tagGroupName];
+      delete this.composer.tag_groups[this.tagGroupName];
+    });
   },
   // used by initializer_composer_tag_groups.js
   validate() {
@@ -44,7 +49,6 @@ export const tagGroupOptions = {
     }
     return true;
   },
-
   actions: {
     onChange(tagId) {
       this.value = tagId;

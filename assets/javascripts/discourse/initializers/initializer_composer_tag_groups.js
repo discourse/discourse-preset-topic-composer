@@ -20,18 +20,24 @@ export default {
         return new Promise((ok, notOk) => {
           const historyStore = api.container.lookup("service:history-store");
           const selectedButton = historyStore.get("newTopicButtonOptions");
-
           if (!selectedButton?.tagGroups) {
             return ok();
           }
-          const composerModel = api.container.lookup("model:composer");
-          let invalidInputs = [];
-          for (const tagGroupInput of Object.values(composerModel.tag_groups)) {
-            const isValid = tagGroupInput.component.validate();
-            if (!isValid) {
-              invalidInputs.push(tagGroupInput.component.tagGroupName);
-            }
-          }
+
+          const { invalidInputs, tagsToAdd } = selectedButton.tagGroups.reduce(
+            (result, { tagGroup }) => {
+              const composerModel = api.container.lookup("model:composer");
+              result.tagsToAdd[tagGroup] = composerModel.tags_to_add[tagGroup];
+
+              const isValid =
+                composerModel.tag_groups[tagGroup].component.validate();
+              if (!isValid) {
+                result.invalidInputs.push(tagGroup);
+              }
+              return result;
+            },
+            { invalidInputs: [], tagsToAdd: {} }
+          );
 
           if (invalidInputs.length > 0) {
             const appEvents = api.container.lookup("service:app-events");
@@ -39,6 +45,8 @@ export default {
             return notOk();
           }
 
+          const composerModel = api.container.lookup("model:composer");
+          composerModel.tags_to_add = tagsToAdd;
           return ok();
         });
       });
