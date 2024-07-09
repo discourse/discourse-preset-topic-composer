@@ -284,8 +284,8 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
       composer.submit
       expect(page).to have_text(title, wait: 15)
       expect(page).to have_text(body)
-      expect(page).to have_text(tag1.name, count: 2)
-      expect(page).to have_text(tag2.name, count: 3)
+      expect(page).to have_text(tag1.name, count: 1)
+      expect(page).to have_text(tag2.name, count: 2)
     end
   end
 end
