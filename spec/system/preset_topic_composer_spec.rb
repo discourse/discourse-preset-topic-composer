@@ -31,7 +31,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
         "categoryId" => cat.id,
         "tagGroups" => [{ "tagGroup" => tag_group.name, "multi" => false, "required" => false }],
         "showTags" => false,
-        "tags" => "",
+        "tags" => "#{tag1.name}",
         "access" => "",
         :highlightUrls => %w[/tag/*],
       },
