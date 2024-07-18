@@ -4,7 +4,7 @@ import { TrackedArray } from "@ember-compat/tracked-built-ins";
 
 export default class DropdownButtonsService extends Service {
   @service router;
-  @service currentUser;
+  @service site;
   @tracked buttons = new TrackedArray();
 
   constructor() {
@@ -14,7 +14,7 @@ export default class DropdownButtonsService extends Service {
 
   refreshButtons() {
     this.buttons = new TrackedArray(
-      this.currentUser.topic_preset_buttons
+      this.site.topic_preset_buttons
         .map((b) => ({
           ...b,
           highlightUrls: b.highlightUrls || [],

@@ -18,7 +18,7 @@ require_relative "lib/discourse_preset_topic_composer/engine"
 register_asset "stylesheets/common/common.scss"
 
 after_initialize do
-  add_to_serializer(:current_user, :topic_preset_buttons) do
+  add_to_serializer(:site, :topic_preset_buttons) do
     buttons = JSON.parse(SiteSetting.button_types) || []
     current_user = scope.user
 
@@ -29,6 +29,7 @@ after_initialize do
           .map { |group_name| Group.find_by(name: group_name)&.id }
           .compact
       allowed_groups = [Group::AUTO_GROUPS[:everyone]] if allowed_groups.empty?
+      next true if allowed_groups.include?(Group::AUTO_GROUPS[:everyone])
       current_user.in_any_groups?(allowed_groups)
     end
   end
