@@ -30,6 +30,7 @@ after_initialize do
           .compact
       allowed_groups = [Group::AUTO_GROUPS[:everyone]] if allowed_groups.empty?
       next true if allowed_groups.include?(Group::AUTO_GROUPS[:everyone])
+      next false if current_user.nil?
       current_user.in_any_groups?(allowed_groups)
     end
   end
