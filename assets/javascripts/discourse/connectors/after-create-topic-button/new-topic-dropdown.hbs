@@ -1,3 +1,7 @@
-{{#if currentUser}}
-  {{new-topic-dropdown category=category}}
+{{#if (and currentUser (not createTopicDisabled))}}
+  {{new-topic-dropdown
+    category=category
+    canCreateTopic=canCreateTopic
+    createTopicDisabled=createTopicDisabled
+  }}
 {{/if}}
