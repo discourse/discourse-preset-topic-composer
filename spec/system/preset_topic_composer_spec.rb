@@ -2,7 +2,18 @@
 
 RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
   let!(:admin) { Fabricate(:admin, name: "Admin") }
-  let(:composer) { PageObjects::Components::Composer.new }
+  fab!(:user) { Fabricate(:user, refresh_auto_groups: true) }
+  fab!(:user_group) { Fabricate(:group, users: [user]) }
+  fab!(:restricted_category) { Fabricate(:category) }
+  fab!(:category_group) do
+    Fabricate(
+      :category_group,
+      category: restricted_category,
+      group: user_group,
+      permission_type: CategoryGroup.permission_types[:create_post],
+    )
+  end
+
   fab!(:tag1) { Fabricate(:tag, name: "tag1") }
   fab!(:tag2) { Fabricate(:tag, name: "tag2") }
   fab!(:tag_synonym_for_tag1) { Fabricate(:tag, name: "tag_synonym", target_tag: tag1) }
@@ -11,6 +22,8 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
     Fabricate(:tag_group, tags: [tag1, tag2, tag_synonym_for_tag1], name: "tag/group0")
   end
   fab!(:tag_group2) { Fabricate(:tag_group, tags: [tag1, tag2]) }
+  let(:composer) { PageObjects::Components::Composer.new }
+
   class SiteSettingHelper
     def self.add_new_json(json)
       site_setting = JSON.parse SiteSetting.button_types
@@ -286,6 +299,22 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
       expect(page).to have_text(body)
       expect(page).to have_text(tag1.name, count: 1)
       expect(page).to have_text(tag2.name, count: 2)
+    end
+
+    describe "as an user with a restricted category" do
+      before { sign_in(user) }
+
+      it "should not show the preset button" do
+        visit "/c/#{restricted_category.slug}"
+        expect(page).not_to have_css(".new-topic-dropdown")
+        expect(page).not_to have_text("New Topic")
+      end
+
+      it "should show the preset button if not in restricted category" do
+        visit "/"
+        expect(page).to have_css(".new-topic-dropdown")
+        expect(page).to have_text("New Topic")
+      end
     end
   end
 end
