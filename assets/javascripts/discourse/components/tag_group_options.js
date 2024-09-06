@@ -1,5 +1,5 @@
 import { tracked } from "@glimmer/tracking";
-import { inject as service } from "@ember/service";
+import { service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 
 export const tagGroupOptions = {
