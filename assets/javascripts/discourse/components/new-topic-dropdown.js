@@ -1,5 +1,5 @@
 import { getOwner } from "@ember/owner";
-import { inject as service } from "@ember/service";
+import { service } from "@ember/service";
 import Composer from "discourse/models/composer";
 import DropdownSelectBoxComponent from "select-kit/components/dropdown-select-box";
 
@@ -21,6 +21,7 @@ export default DropdownSelectBoxComponent.extend({
   get content() {
     return this.dropdownButtons.buttons;
   },
+
   actions: {
     onChange(selectedAction) {
       const composerController = getOwner(this).lookup("controller:composer");

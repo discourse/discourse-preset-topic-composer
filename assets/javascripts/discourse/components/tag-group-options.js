@@ -1,5 +1,5 @@
 import { tracked } from "@glimmer/tracking";
-import { inject as service } from "@ember/service";
+import { service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 
 export const tagGroupOptions = {
@@ -41,7 +41,8 @@ export const tagGroupOptions = {
       delete this.composer.tag_groups[this.tagGroupName];
     });
   },
-  // used by initializer_composer_tag_groups.js
+
+  // used by initializer-composer-tag-groups.js
   validate() {
     if (this.required && !this.value) {
       this.isInvalid = true;
@@ -49,6 +50,7 @@ export const tagGroupOptions = {
     }
     return true;
   },
+
   actions: {
     onChange(tagId) {
       this.value = tagId;

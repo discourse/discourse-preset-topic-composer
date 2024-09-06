@@ -16,6 +16,7 @@ export default {
         tag_groups: {},
         tags_to_add: {},
       });
+
       api.composerBeforeSave(() => {
         return new Promise((ok, notOk) => {
           const historyStore = api.container.lookup("service:history-store");
