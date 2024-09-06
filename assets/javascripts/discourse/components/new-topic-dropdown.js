@@ -21,6 +21,7 @@ export default DropdownSelectBoxComponent.extend({
   get content() {
     return this.dropdownButtons.buttons;
   },
+
   actions: {
     onChange(selectedAction) {
       const composerController = getOwner(this).lookup("controller:composer");

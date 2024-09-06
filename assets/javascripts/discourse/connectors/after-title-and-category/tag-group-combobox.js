@@ -4,9 +4,12 @@ import { service } from "@ember/service";
 export default Component.extend({
   historyStore: service(),
   appEvents: service(),
+
   classNames: ["tag-group_wrapper"],
+
   init() {
     this._super(...arguments);
+
     const composerHTML = document.querySelector(".composer-fields");
     const selectedButton = this.historyStore.get("newTopicButtonOptions");
     const shouldShowTags = selectedButton?.showTags || false;
@@ -20,14 +23,15 @@ export default Component.extend({
       this.historyStore.set("newTopicButtonOptions", null);
     });
   },
-  get tagGroupList() {
-    const selectedButton = this.historyStore.get("newTopicButtonOptions");
-    return selectedButton?.tagGroups || [];
-  },
 
   willDestroyElement() {
     this._super(...arguments);
     const composerHTML = document.querySelector(".composer-fields");
     composerHTML.classList.remove("hide-tag");
+  },
+
+  get tagGroupList() {
+    const selectedButton = this.historyStore.get("newTopicButtonOptions");
+    return selectedButton?.tagGroups || [];
   },
 });

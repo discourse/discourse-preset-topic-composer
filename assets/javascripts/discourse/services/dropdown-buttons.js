@@ -1,11 +1,11 @@
 import { tracked } from "@glimmer/tracking";
 import Service, { service } from "@ember/service";
-import { TrackedArray } from "@ember-compat/tracked-built-ins";
 
 export default class DropdownButtonsService extends Service {
   @service router;
   @service site;
-  @tracked buttons = new TrackedArray();
+
+  @tracked buttons;
 
   constructor() {
     super(...arguments);
@@ -13,22 +13,20 @@ export default class DropdownButtonsService extends Service {
   }
 
   refreshButtons() {
-    this.buttons = new TrackedArray(
-      this.site.topic_preset_buttons
-        .map((b) => ({
-          ...b,
-          highlightUrls: b.highlightUrls || [],
-        }))
-        .map((button) => {
-          if (
-            this.#shouldHighlightByCategoryID(button.categoryId) ||
-            button.highlightUrls.some((url) => this.#shouldHighlightByURL(url))
-          ) {
-            button.classNames = "is-selected";
-          }
-          return button;
-        })
-    );
+    this.buttons = this.site.topic_preset_buttons
+      .map((b) => ({
+        ...b,
+        highlightUrls: b.highlightUrls || [],
+      }))
+      .map((button) => {
+        if (
+          this.#shouldHighlightByCategoryID(button.categoryId) ||
+          button.highlightUrls.some((url) => this.#shouldHighlightByURL(url))
+        ) {
+          button.classNames = "is-selected";
+        }
+        return button;
+      });
   }
 
   #shouldHighlightByURL(url) {
