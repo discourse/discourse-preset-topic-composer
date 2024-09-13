@@ -31,7 +31,7 @@ acceptance(
       await newTopicDropdown.expand();
       await newTopicDropdown.selectRowByValue("NEW_BUG");
 
-      assert.ok(triggered);
+      assert.steps(["triggered"]);
     });
   }
 );
