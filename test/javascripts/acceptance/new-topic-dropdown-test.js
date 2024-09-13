@@ -1,7 +1,7 @@
 import { getOwner } from "@ember/owner";
 import { visit } from "@ember/test-helpers";
 import { test } from "qunit";
-import { acceptance, resetSite } from "discourse/tests/helpers/qunit-helpers";
+import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 import selectKit from "discourse/tests/helpers/select-kit-helper";
 
 acceptance(
@@ -13,7 +13,6 @@ acceptance(
     });
 
     test("app event on change", async function (assert) {
-      let triggered = false;
       const appEvents = getOwner(this).lookup("service:app-events");
       appEvents.on(
         "discourse-preset-topic-composer:new-topic-preset-selected",
