@@ -11,12 +11,7 @@ acceptance(
 
     needs.hooks.beforeEach(() => {
       resetSite({
-        topic_preset_buttons: [
-          {
-            id: "NEW_BUG",
-            name: "Report a bug",
-          },
-        ],
+        topic_preset_buttons: [{ id: "NEW_BUG", name: "Report a bug" }],
       });
     });
 
