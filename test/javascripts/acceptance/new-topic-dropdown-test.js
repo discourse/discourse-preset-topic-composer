@@ -8,11 +8,8 @@ acceptance(
   "DiscoursePresetTopicComposer - new topic dropdown",
   function (needs) {
     needs.user();
-
-    needs.hooks.beforeEach(() => {
-      resetSite({
-        topic_preset_buttons: [{ id: "NEW_BUG", name: "Report a bug" }],
-      });
+    needs.site({
+      topic_preset_buttons: [{ id: "NEW_BUG", name: "Report a bug" }],
     });
 
     test("app event on change", async function (assert) {
