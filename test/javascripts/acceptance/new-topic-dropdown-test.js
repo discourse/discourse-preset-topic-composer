@@ -21,7 +21,7 @@ acceptance(
       appEvents.on(
         "discourse-preset-topic-composer:new-topic-preset-selected",
         () => {
-          triggered = true;
+          assert.step("triggered");
         }
       );
 
