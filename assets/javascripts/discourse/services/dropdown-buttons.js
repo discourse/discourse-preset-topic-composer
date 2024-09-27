@@ -35,24 +35,28 @@ export default class DropdownButtonsService extends Service {
     // case 3 - url starts with *, e.g. *example, it should match any url ending with "example"
     // case 4 - url ends with *, e.g. example*, it should match any url starting with "example"
 
-    const startsWithStar = url.startsWith("*");
-    const endsWithStar = url.endsWith("*");
+    // Do all string comparisons in lowercase.
+    const _url = url.toLowerCase();
+    const _currentURL = this.router.currentURL.toLowerCase();
+
+    const startsWithStar = _url.startsWith("*");
+    const endsWithStar = _url.endsWith("*");
     const exactMatch = !startsWithStar && !endsWithStar;
 
     if (exactMatch) {
-      return url === this.router.currentURL;
+      return _url === _currentURL;
     }
 
     if (startsWithStar && endsWithStar) {
-      return this.router.currentURL.includes(url.replace(/\*/g, ""));
+      return _currentURL.includes(_url.replace(/\*/g, ""));
     }
 
     if (startsWithStar) {
-      return this.router.currentURL.endsWith(url.replace(/\*/g, ""));
+      return _currentURL.endsWith(_url.replace(/\*/g, ""));
     }
 
     if (endsWithStar) {
-      return this.router.currentURL.startsWith(url.replace(/\*/g, ""));
+      return _currentURL.startsWith(_url.replace(/\*/g, ""));
     }
 
     return false;
