@@ -21,7 +21,7 @@ export default class DropdownButtonsService extends Service {
       .map((button) => {
         if (
           this.#shouldHighlightByCategoryID(button.categoryId) ||
-          button.highlightUrls.some((url) => this.#shouldHighlightByURL(url))
+          button.highlightUrls.some((url) => this.#shouldHighlightByURL(url.toLowerCase()))
         ) {
           button.classNames = "is-selected";
         }
@@ -36,27 +36,27 @@ export default class DropdownButtonsService extends Service {
     // case 4 - url ends with *, e.g. example*, it should match any url starting with "example"
 
     // Do all string comparisons in lowercase.
-    const _url = url.toLowerCase();
-    const _currentURL = this.router.currentURL.toLowerCase();
+    // the "url" is alredy in lowercase, but the currentURL is not.
+    const currentURL = this.router.currentURL.toLowerCase();
 
-    const startsWithStar = _url.startsWith("*");
-    const endsWithStar = _url.endsWith("*");
+    const startsWithStar = url.startsWith("*");
+    const endsWithStar = url.endsWith("*");
     const exactMatch = !startsWithStar && !endsWithStar;
 
     if (exactMatch) {
-      return _url === _currentURL;
+      return url === currentURL;
     }
 
     if (startsWithStar && endsWithStar) {
-      return _currentURL.includes(_url.replace(/\*/g, ""));
+      return currentURL.includes(url.replace(/\*/g, ""));
     }
 
     if (startsWithStar) {
-      return _currentURL.endsWith(_url.replace(/\*/g, ""));
+      return currentURL.endsWith(url.replace(/\*/g, ""));
     }
 
     if (endsWithStar) {
-      return _currentURL.startsWith(_url.replace(/\*/g, ""));
+      return currentURL.startsWith(url.replace(/\*/g, ""));
     }
 
     return false;
