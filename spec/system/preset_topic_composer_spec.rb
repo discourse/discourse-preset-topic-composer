@@ -233,6 +233,15 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
       expect(button).to have_text("New Question2")
     end
 
+    it "should add is-selected class to the button when in matching url and ignores casing" do
+      tag = "#{tag1.name}".upcase
+      visit "/tag/#{tag}"
+      PageObjects::Components::PresetTopicDropdown.new.button.click
+
+      button = find(:css, ".is-selected")
+      expect(button).to have_text("New Question2")
+    end
+
     it "should add is-selected class to the button when in categoryId" do
       visit "/c/#{cat.slug}"
       PageObjects::Components::PresetTopicDropdown.new.button.click

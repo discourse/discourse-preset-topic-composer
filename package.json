@@ -1,5 +1,9 @@
 {
   "private": true,
+  "scripts": {
+    "prettier:check": "prettier --check \"{app,assets,config,db,lib,spec,test}/**/*.{js,gjs,es6,scss}\"",
+    "prettier:fix": "prettier --check --write \"{app,assets,config,db,lib,spec,test}/**/*.{js,gjs,es6,scss}\""
+  },
   "devDependencies": {
     "@discourse/lint-configs": "1.3.10",
     "ember-template-lint": "6.0.0",
