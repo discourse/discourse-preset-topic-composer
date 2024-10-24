@@ -1,3 +1,4 @@
+import { action } from "@ember/object";
 import { getOwner } from "@ember/owner";
 import { service } from "@ember/service";
 import Composer from "discourse/models/composer";
@@ -8,6 +9,7 @@ export default DropdownSelectBoxComponent.extend({
   siteSettings: service(),
   historyStore: service(),
   dropdownButtons: service(),
+  appEvents: service(),
 
   selectKitOptions: {
     icon: "plus",
@@ -22,29 +24,37 @@ export default DropdownSelectBoxComponent.extend({
     return this.dropdownButtons.buttons;
   },
 
-  actions: {
-    onChange(selectedAction) {
-      const composerController = getOwner(this).lookup("controller:composer");
-      let selectedButton = this.historyStore.get("newTopicButtonOptions");
+  @action
+  onChange(selectedAction) {
+    const composerController = getOwner(this).lookup("controller:composer");
+    let selectedButton = this.historyStore.get("newTopicButtonOptions");
 
-      if (!selectedButton || selectedAction !== selectedButton.id) {
-        const buttons = JSON.parse(this.siteSettings.button_types);
-        selectedButton = buttons.find((button) => button.id === selectedAction);
-        this.historyStore.set("newTopicButtonOptions", selectedButton);
-      }
+    if (!selectedButton || selectedAction !== selectedButton.id) {
+      const buttons = JSON.parse(this.siteSettings.button_types);
+      selectedButton = buttons.find((button) => button.id === selectedAction);
+      this.historyStore.set("newTopicButtonOptions", selectedButton);
+    }
 
-      const selectedButtonCategoryId =
-        selectedButton.categoryId > 0 ? selectedButton.categoryId : null;
+    const selectedButtonCategoryId =
+      selectedButton.categoryId > 0 ? selectedButton.categoryId : null;
 
-      const tags = selectedButton.tags.split(/(?:,|\s)\s*/).filter(Boolean); // remove [''] from tags;
-      const options = {
-        action: Composer.CREATE_TOPIC,
-        draftKey: Composer.NEW_TOPIC_KEY,
-        categoryId: selectedButtonCategoryId ?? this.category?.id ?? null,
+    const tags = selectedButton.tags.split(/(?:,|\s)\s*/).filter(Boolean); // remove [''] from tags;
+    const options = {
+      action: Composer.CREATE_TOPIC,
+      draftKey: Composer.NEW_TOPIC_KEY,
+      categoryId: selectedButtonCategoryId ?? this.category?.id ?? null,
+      tags,
+    };
+
+    composerController.open(options);
+
+    this.appEvents.trigger(
+      "discourse-preset-topic-composer:new-topic-preset-selected",
+      {
+        selectedAction,
+        category: this.category,
         tags,
-      };
-
-      composerController.open(options);
-    },
+      }
+    );
   },
 });
