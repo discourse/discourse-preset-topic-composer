@@ -24,7 +24,7 @@ export default DropdownSelectBoxComponent.extend({
 
   actions: {
     onChange(selectedAction) {
-      const composerController = getOwner(this).lookup("controller:composer");
+      const composerController = getOwner(this).lookup("service:composer");
       let selectedButton = this.historyStore.get("newTopicButtonOptions");
 
       if (!selectedButton || selectedAction !== selectedButton.id) {
