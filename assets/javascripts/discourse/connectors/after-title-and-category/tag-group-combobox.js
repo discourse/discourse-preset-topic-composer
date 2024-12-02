@@ -1,14 +1,14 @@
 import Component from "@ember/component";
 import { service } from "@ember/service";
+import { classNames } from "@ember-decorators/component";
 
-export default Component.extend({
-  historyStore: service(),
-  appEvents: service(),
-
-  classNames: ["tag-group_wrapper"],
+@classNames("tag-group_wrapper")
+export default class TagGroupCombobox extends Component {
+  @service historyStore;
+  @service appEvents;
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
 
     const composerHTML = document.querySelector(".composer-fields");
     const selectedButton = this.historyStore.get("newTopicButtonOptions");
@@ -22,16 +22,16 @@ export default Component.extend({
     this.appEvents.on("draft:destroyed", () => {
       this.historyStore.set("newTopicButtonOptions", null);
     });
-  },
+  }
 
   willDestroyElement() {
-    this._super(...arguments);
+    super.willDestroyElement(...arguments);
     const composerHTML = document.querySelector(".composer-fields");
     composerHTML.classList.remove("hide-tag");
-  },
+  }
 
   get tagGroupList() {
     const selectedButton = this.historyStore.get("newTopicButtonOptions");
     return selectedButton?.tagGroups || [];
-  },
-});
+  }
+}
