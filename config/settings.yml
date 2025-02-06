@@ -18,28 +18,6 @@ discourse_preset_topic_composer:
           "tagGroups": []
         },
         {
-          "id": "NEW_CONVERSATION",
-          "name": "New conversation",
-          "description": "Start a new conversation",
-          "icon": "ph-chat-circle",
-          "categoryId": 0,
-          "tags": "conversation",
-          "showTags": false,
-          "access": "",
-          "tagGroups": []
-        },
-        {
-          "id": "NEW_BUG",
-          "name": "Report a bug",
-          "description": "Found a bug? Let's report it.",
-          "icon": "ph-bug",
-          "categoryId": 0,
-          "tags": "bug",
-          "showTags": false,
-          "access": "",
-          "tagGroups": []
-        },
-        {
           "id": "NEW_SHOWCASE",
           "name": "New showcase",
           "description": "Share your case with community",
@@ -51,34 +29,12 @@ discourse_preset_topic_composer:
           "tagGroups": []
         },
         {
-          "id": "NEW_FEEDBACK",
-          "name": "New feedback",
-          "description": "Let us know how we can improve our platform",
-          "icon": "ph-note-pencil",
-          "categoryId": 0,
-          "tags": "feedback",
-          "showTags": false,
-          "access": "",
-          "tagGroups": []
-        },
-        {
           "id": "NEW_COLLABORATION",
           "name": "New collaboration",
           "description": "Build, or find your team",
           "icon": "handshake-angle",
           "categoryId": 0,
           "tags": "collaboration",
-          "showTags": false,
-          "access": "",
-          "tagGroups": []
-        },
-        {
-          "id": "NEW_ANNOUNCEMENT",
-          "name": "New announcement",
-          "description": "I have something to say",
-          "icon": "ph-quotes",
-          "categoryId": 0,
-          "tags": "announcement",
           "showTags": false,
           "access": "",
           "tagGroups": []
