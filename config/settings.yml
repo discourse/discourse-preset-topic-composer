@@ -10,7 +10,7 @@ discourse_preset_topic_composer:
           "id": "NEW_QUESTION",
           "name": "New question",
           "description": "Ask a new question in selected category.",
-          "icon": "circle-question",
+          "icon": "question",
           "categoryId": 19,
           "tags": "question",
           "showTags": false,
