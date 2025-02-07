@@ -1,5 +1,7 @@
 en:
   discourse_preset_topic_composer_enabled: "Enable preset topic composer"
+  hide_new_topic_button_on_top_menu: "Hide 'New Topic' button on frontpage and top menu pages. Uncheck to display the button on all pages."
+  hide_unmatched_composer_presets: "Hide the composer presets that are NOT highlighted as recommendation."
   button_types: Launch the editor to define various "new topic" buttons
   dialog:
       error_message: "Please fill required fields"
