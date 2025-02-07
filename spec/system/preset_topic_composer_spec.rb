@@ -38,7 +38,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
     SiteSettingHelper.add_new_json(
       {
         "id" => "new_question2",
-        "icon" => "circle-question",
+        "icon" => "question",
         "name" => "New Question2",
         "description" => "Ask a new question in selected category.",
         "categoryId" => cat.id,
@@ -52,7 +52,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
     SiteSettingHelper.add_new_json(
       {
         "id" => "new_question3",
-        "icon" => "circle-question",
+        "icon" => "question",
         "name" => "New Question3",
         "description" => "Ask a new question in selected category.",
         "categoryId" => cat.id,
