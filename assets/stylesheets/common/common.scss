@@ -13,6 +13,7 @@
     max-width: 0 !important;
     margin: 0 !important;
   }
+
   .category-input {
     max-width: 100% !important;
   }
@@ -36,11 +37,13 @@ body.category[style*="--category-color"] .new-topic-dropdown .btn {
   margin-bottom: 8px;
   max-width: calc(50% - 4px);
 }
+
 .tag-group-input--invalid {
   .select-kit-header {
     border: 1px solid var(--danger) !important;
   }
 }
+
 .tag-group_wrapper {
   width: 100%;
   display: flex;
