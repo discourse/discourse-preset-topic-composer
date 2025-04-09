@@ -6,6 +6,7 @@ import Composer from "discourse/models/composer";
 import DropdownSelectBoxComponent from "select-kit/components/dropdown-select-box";
 import { selectKitOptions } from "select-kit/components/select-kit";
 
+@classNames("new-topic-dropdown")
 @selectKitOptions({
   icon: "plus",
   showFullTitle: true,
@@ -14,11 +15,11 @@ import { selectKitOptions } from "select-kit/components/select-kit";
   showCaret: true,
   none: "topic.create",
 })
-@classNames("new-topic-dropdown")
-export default class NewTopicDropdown extends DropdownSelectBoxComponent {
+export default class NewTopicDropdownButton extends DropdownSelectBoxComponent {
   @service siteSettings;
   @service historyStore;
   @service dropdownButtons;
+  @service router;
 
   get content() {
     return this.dropdownButtons.buttons;
