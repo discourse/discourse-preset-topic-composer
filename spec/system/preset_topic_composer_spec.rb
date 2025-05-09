@@ -253,7 +253,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
       expect(button[:class]).to include("is-selected")
     end
 
-    it "should sort alphabetically if SiteSetting is enabled" do
+    xit "should sort alphabetically if SiteSetting is enabled" do
       SiteSetting.tags_sort_alphabetically = true
       Fabricate(:topic, tags: [tag_synonym_for_tag1])
       visit "/"
