@@ -3,11 +3,11 @@ import { concat, hash } from "@ember/helper";
 import { service } from "@ember/service";
 import { classNames } from "@ember-decorators/component";
 import { i18n } from "discourse-i18n";
-import tagGroupCombobox from "../../components/tag-group-combobox";
-import tagGroupMultiselect from "../../components/tag-group-multiselect";
+import TagGroupCombobox from "../../components/tag-group-combobox";
+import TagGroupMultiselect from "../../components/tag-group-multiselect";
 
 @classNames("tag-group_wrapper")
-export default class TagGroupCombobox extends Component {
+export default class TagGroupComboboxConnector extends Component {
   @service historyStore;
   @service appEvents;
 
@@ -43,31 +43,31 @@ export default class TagGroupCombobox extends Component {
     {{#if this.currentUser.can_create_topic}}
       {{#each this.tagGroupList as |tagGroupOption|}}
         {{#if tagGroupOption.multi}}
-          {{tagGroupMultiselect
-            composer=@outletArgs.model
-            tagGroupName=tagGroupOption.tagGroup
-            required=tagGroupOption.required
-            options=(hash
+          <TagGroupMultiselect
+            @composer={{@outletArgs.model}}
+            @tagGroupName={{tagGroupOption.tagGroup}}
+            @required={{tagGroupOption.required}}
+            @options={{hash
               translatedNone=(if
                 tagGroupOption.required
                 (concat "*" (i18n "composer.select") tagGroupOption.tagGroup)
                 (concat (i18n "composer.select") tagGroupOption.tagGroup)
               )
-            )
-          }}
+            }}
+          />
         {{else}}
-          {{tagGroupCombobox
-            composer=@outletArgs.model
-            tagGroupName=tagGroupOption.tagGroup
-            required=tagGroupOption.required
-            options=(hash
+          <TagGroupCombobox
+            @composer={{@outletArgs.model}}
+            @tagGroupName={{tagGroupOption.tagGroup}}
+            @required={{tagGroupOption.required}}
+            @options={{hash
               translatedNone=(if
                 tagGroupOption.required
                 (concat "*" (i18n "composer.select") tagGroupOption.tagGroup)
                 (concat (i18n "composer.select") tagGroupOption.tagGroup)
               )
-            )
-          }}
+            }}
+          />
         {{/if}}
       {{/each}}
     {{/if}}
