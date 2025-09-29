@@ -35,14 +35,11 @@ export default class NewTopicDropdown extends DropdownSelectBoxComponent {
       this.historyStore.set("newTopicButtonOptions", selectedButton);
     }
 
-    const selectedButtonCategoryId =
-      selectedButton.categoryId > 0 ? selectedButton.categoryId : null;
-
     const tags = selectedButton.tags.split(/(?:,|\s)\s*/).filter(Boolean); // remove [''] from tags;
     const options = {
       action: Composer.CREATE_TOPIC,
       draftKey: Composer.NEW_TOPIC_KEY,
-      categoryId: selectedButtonCategoryId ?? this.category?.id ?? null,
+      categoryId: this.category?.id,
       tags,
     };
 

@@ -310,17 +310,11 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
       expect(page).to have_text(tag2.name, count: 2)
     end
 
-    describe "as an user with a restricted category" do
+    describe "as a user with a restricted category" do
       before { sign_in(user) }
 
-      it "should not show the preset button" do
+      it "should always show the new topic button" do
         visit "/c/#{restricted_category.slug}"
-        expect(page).not_to have_css(".new-topic-dropdown")
-        expect(page).not_to have_text("New Topic")
-      end
-
-      it "should show the preset button if not in restricted category" do
-        visit "/"
         expect(page).to have_css(".new-topic-dropdown")
         expect(page).to have_text("New Topic")
       end
