@@ -273,7 +273,9 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
     end
 
     it "should not create a topic with a preset and outside tags" do
-      visit "/"
+      non_related_category = Fabricate(:category)
+      visit "/c/#{non_related_category.slug}"
+
       preset_dropdown = PageObjects::Components::PresetTopicDropdown.new
       preset_dropdown.select("New Question3")
 
@@ -292,6 +294,8 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
       expect(page).to have_text(body)
       expect(page).to have_text(tag1.name)
       expect(page).to have_text(tag2.name)
+      expect(Topic.last.category.id).to eq(cat.id)
+
       find("img[id='site-logo']").click
       preset_dropdown = PageObjects::Components::PresetTopicDropdown.new
       preset_dropdown.select("New Question3")
@@ -304,10 +308,12 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
       composer.type_content(body)
 
       composer.submit
+
       expect(page).to have_text(title, wait: 15)
       expect(page).to have_text(body)
       expect(page).to have_text(tag1.name, count: 1)
       expect(page).to have_text(tag2.name, count: 2)
+      expect(Topic.last.category.id).to eq(cat.id)
     end
 
     describe "as a user with a restricted category" do
@@ -317,6 +323,10 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
         visit "/c/#{restricted_category.slug}"
         expect(page).to have_css(".new-topic-dropdown")
         expect(page).to have_text("New Topic")
+
+        preset_dropdown = PageObjects::Components::PresetTopicDropdown.new
+        preset_dropdown.button.click
+        expect(page).not_to have_text("New Question3")
       end
     end
   end
