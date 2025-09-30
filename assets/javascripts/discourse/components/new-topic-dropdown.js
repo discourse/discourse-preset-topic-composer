@@ -36,13 +36,15 @@ export default class NewTopicDropdown extends DropdownSelectBoxComponent {
     }
 
     const selectedButtonCategoryId =
-      selectedButton.categoryId > 0 ? selectedButton.categoryId : null;
+      selectedButton.categoryId > 0
+        ? selectedButton.categoryId
+        : this.category?.id;
 
     const tags = selectedButton.tags.split(/(?:,|\s)\s*/).filter(Boolean); // remove [''] from tags;
     const options = {
       action: Composer.CREATE_TOPIC,
       draftKey: Composer.NEW_TOPIC_KEY,
-      categoryId: selectedButtonCategoryId ?? this.category?.id ?? null,
+      categoryId: selectedButtonCategoryId,
       tags,
     };
 

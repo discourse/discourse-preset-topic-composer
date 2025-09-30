@@ -40,36 +40,34 @@ export default class TagGroupComboboxConnector extends Component {
   }
 
   <template>
-    {{#if this.currentUser.can_create_topic}}
-      {{#each this.tagGroupList as |tagGroupOption|}}
-        {{#if tagGroupOption.multi}}
-          <TagGroupMultiselect
-            @composer={{@outletArgs.model}}
-            @tagGroupName={{tagGroupOption.tagGroup}}
-            @required={{tagGroupOption.required}}
-            @options={{hash
-              translatedNone=(if
-                tagGroupOption.required
-                (concat "*" (i18n "composer.select") tagGroupOption.tagGroup)
-                (concat (i18n "composer.select") tagGroupOption.tagGroup)
-              )
-            }}
-          />
-        {{else}}
-          <TagGroupCombobox
-            @composer={{@outletArgs.model}}
-            @tagGroupName={{tagGroupOption.tagGroup}}
-            @required={{tagGroupOption.required}}
-            @options={{hash
-              translatedNone=(if
-                tagGroupOption.required
-                (concat "*" (i18n "composer.select") tagGroupOption.tagGroup)
-                (concat (i18n "composer.select") tagGroupOption.tagGroup)
-              )
-            }}
-          />
-        {{/if}}
-      {{/each}}
-    {{/if}}
+    {{#each this.tagGroupList as |tagGroupOption|}}
+      {{#if tagGroupOption.multi}}
+        <TagGroupMultiselect
+          @composer={{@outletArgs.model}}
+          @tagGroupName={{tagGroupOption.tagGroup}}
+          @required={{tagGroupOption.required}}
+          @options={{hash
+            translatedNone=(if
+              tagGroupOption.required
+              (concat "*" (i18n "composer.select") tagGroupOption.tagGroup)
+              (concat (i18n "composer.select") tagGroupOption.tagGroup)
+            )
+          }}
+        />
+      {{else}}
+        <TagGroupCombobox
+          @composer={{@outletArgs.model}}
+          @tagGroupName={{tagGroupOption.tagGroup}}
+          @required={{tagGroupOption.required}}
+          @options={{hash
+            translatedNone=(if
+              tagGroupOption.required
+              (concat "*" (i18n "composer.select") tagGroupOption.tagGroup)
+              (concat (i18n "composer.select") tagGroupOption.tagGroup)
+            )
+          }}
+        />
+      {{/if}}
+    {{/each}}
   </template>
 }
