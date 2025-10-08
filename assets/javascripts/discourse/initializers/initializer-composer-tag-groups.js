@@ -6,7 +6,7 @@ export default {
   initialize() {
     Composer.serializeOnCreate("tags_to_add");
 
-    withPluginApi("0.8.12", (api) => {
+    withPluginApi((api) => {
       api.onPageChange(() =>
         api.container.lookup("service:dropdown-buttons").refreshButtons()
       );
