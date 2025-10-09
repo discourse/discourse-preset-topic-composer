@@ -4,7 +4,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
   let!(:admin) { Fabricate(:admin, name: "Admin") }
   fab!(:user) { Fabricate(:user, refresh_auto_groups: true) }
   fab!(:user_group) { Fabricate(:group, users: [user]) }
-  fab!(:restricted_category) { Fabricate(:category) }
+  fab!(:restricted_category, :category)
   fab!(:category_group) do
     Fabricate(
       :category_group,
@@ -17,7 +17,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
   fab!(:tag1) { Fabricate(:tag, name: "tag1") }
   fab!(:tag2) { Fabricate(:tag, name: "tag2") }
   fab!(:tag_synonym_for_tag1) { Fabricate(:tag, name: "tag_synonym", target_tag: tag1) }
-  fab!(:cat) { Fabricate(:category) }
+  fab!(:cat, :category)
   fab!(:tag_group) do
     Fabricate(:tag_group, tags: [tag1, tag2, tag_synonym_for_tag1], name: "tag/group0")
   end
