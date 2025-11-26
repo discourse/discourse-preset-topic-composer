@@ -76,7 +76,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
       preset_dropdown.select("New Question2")
 
       composer_title = find(".action-title")
-      expect(composer_title).to have_text("Create a new Topic")
+      expect(composer_title).to have_text(I18n.t("js.topic.create_long"))
     end
 
     it "can fetch a tag group with a / in the name" do
