@@ -10,7 +10,7 @@ export default class NewTopicDropdownConnector extends Component {
   @service siteSettings;
 
   get showButton() {
-    if (this.siteSettings.show_new_topic_button_only_on_category) {
+    if (this.siteSettings.show_new_topic_button_only_on_categories) {
       return this.category !== null;
     }
     return true;
