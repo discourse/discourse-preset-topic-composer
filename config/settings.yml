@@ -2,6 +2,12 @@ discourse_preset_topic_composer:
   discourse_preset_topic_composer_enabled:
     default: false
     client: true
+  show_new_topic_button_only_on_category:
+    default: false
+    client: true
+  hide_unmatched_composer_presets:
+    default: false
+    client: true
   button_types:
     client: true
     default: >-
