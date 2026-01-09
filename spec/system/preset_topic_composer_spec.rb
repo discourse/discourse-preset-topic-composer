@@ -257,7 +257,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
       before { SiteSetting.show_new_topic_button_only_on_categories = true }
 
       it "should show the new topic button only on categories" do
-        visit "/"
+        visit "/tag/#{tag1.name}"
         expect(page).to_not have_css(".new-topic-dropdown")
 
         visit "/c/#{cat.slug}"
