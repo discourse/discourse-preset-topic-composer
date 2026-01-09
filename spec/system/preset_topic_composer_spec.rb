@@ -261,7 +261,6 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
         expect(page).to_not have_css(".new-topic-dropdown")
 
         visit "/c/#{cat.slug}"
-        pause_test
         expect(page).to have_css(".new-topic-dropdown")
       end
     end
