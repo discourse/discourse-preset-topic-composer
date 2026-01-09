@@ -253,6 +253,34 @@ RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
       expect(button[:class]).to include("is-selected")
     end
 
+    context "with show_new_topic_button_only_on_categories enabled" do
+      before { SiteSetting.show_new_topic_button_only_on_categories = true }
+
+      it "should show the new topic button only on categories" do
+        visit "/"
+        expect(page).to_not have_css(".new-topic-dropdown")
+
+        visit "/c/#{cat.slug}"
+        pause_test
+        expect(page).to have_css(".new-topic-dropdown")
+      end
+    end
+
+    context "with hide_unmatched_composer_presets enabled" do
+      before { SiteSetting.hide_unmatched_composer_presets = true }
+
+      it "should hide unmatched composer presets" do
+        visit "/tag/#{tag1.name}"
+        expect(page).to have_css(".new-topic-dropdown")
+
+        preset_dropdown = PageObjects::Components::PresetTopicDropdown.new
+        preset_dropdown.button.click
+
+        expect(page).to have_text("New Question2")
+        expect(page).to_not have_text("New Question3")
+      end
+    end
+
     xit "should sort alphabetically if SiteSetting is enabled" do
       SiteSetting.tags_sort_alphabetically = true
       Fabricate(:topic, tags: [tag_synonym_for_tag1])
