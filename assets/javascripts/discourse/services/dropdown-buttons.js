@@ -4,6 +4,7 @@ import Service, { service } from "@ember/service";
 export default class DropdownButtonsService extends Service {
   @service router;
   @service site;
+  @service siteSettings;
 
   @tracked buttons;
 
@@ -13,7 +14,7 @@ export default class DropdownButtonsService extends Service {
   }
 
   refreshButtons() {
-    this.buttons = this.site.topic_preset_buttons
+    const buttons = this.site.topic_preset_buttons
       .map((b) => ({
         ...b,
         highlightUrls: b.highlightUrls || [],
@@ -29,6 +30,17 @@ export default class DropdownButtonsService extends Service {
         }
         return button;
       });
+
+    this.buttons = buttons;
+
+    if (this.siteSettings.hide_unmatched_composer_presets) {
+      const filteredButtons = buttons.filter(
+        (b) => b.classNames === "is-selected"
+      );
+      if (filteredButtons.length > 0) {
+        this.buttons = filteredButtons;
+      }
+    }
   }
 
   #shouldHighlightByURL(url) {

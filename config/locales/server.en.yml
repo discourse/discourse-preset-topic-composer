@@ -1,5 +1,7 @@
 en:
   discourse_preset_topic_composer_enabled: "Enable preset topic composer"
+  show_new_topic_button_only_on_categories: "Display the 'New Topic' button exclusively on category pages. If this option is unchecked, the button will appear on all pages."
+  hide_unmatched_composer_presets: "Hide the composer presets unless they are designated as recommended."
   button_types: Launch the editor to define various "new topic" buttons
   dialog:
       error_message: "Please fill required fields"
