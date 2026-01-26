@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe "Preset Topic Composer | preset topic creation", type: :system do
+RSpec.describe "Preset Topic Composer | preset topic creation" do
   let!(:admin) { Fabricate(:admin, name: "Admin") }
   fab!(:user) { Fabricate(:user, refresh_auto_groups: true) }
   fab!(:user_group) { Fabricate(:group, users: [user]) }
