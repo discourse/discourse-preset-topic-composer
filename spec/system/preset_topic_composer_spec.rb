@@ -234,7 +234,8 @@ RSpec.describe "Preset Topic Composer | preset topic creation" do
     end
 
     it "should add is-selected class to the button when in matching url and ignores casing" do
-      visit tag1.url
+      tag = "#{tag1.name}".upcase
+      visit "/tag/#{tag}"
       PageObjects::Components::PresetTopicDropdown.new.button.click
 
       button = find(:css, ".is-selected")
