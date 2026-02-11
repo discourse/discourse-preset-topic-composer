@@ -226,7 +226,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation" do
     end
 
     it "should add is-selected class to the button when in matching url" do
-      visit "/tag/#{tag1.name}"
+      visit tag1.url
       PageObjects::Components::PresetTopicDropdown.new.button.click
 
       button = find(:css, ".is-selected")
@@ -257,7 +257,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation" do
       before { SiteSetting.show_new_topic_button_only_on_categories = true }
 
       it "should show the new topic button only on categories" do
-        visit "/tag/#{tag1.name}"
+        visit tag1.url
         expect(page).to_not have_css(".new-topic-dropdown")
 
         visit "/c/#{cat.slug}"
@@ -269,7 +269,7 @@ RSpec.describe "Preset Topic Composer | preset topic creation" do
       before { SiteSetting.hide_unmatched_composer_presets = true }
 
       it "should hide unmatched composer presets" do
-        visit "/tag/#{tag1.name}"
+        visit tag1.url
         expect(page).to have_css(".new-topic-dropdown")
 
         preset_dropdown = PageObjects::Components::PresetTopicDropdown.new
