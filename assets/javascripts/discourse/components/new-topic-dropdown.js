@@ -3,8 +3,8 @@ import { getOwner } from "@ember/owner";
 import { service } from "@ember/service";
 import { classNames } from "@ember-decorators/component";
 import Composer from "discourse/models/composer";
-import DropdownSelectBoxComponent from "select-kit/components/dropdown-select-box";
-import { selectKitOptions } from "select-kit/components/select-kit";
+import DropdownSelectBoxComponent from "discourse/select-kit/components/dropdown-select-box";
+import { selectKitOptions } from "discourse/select-kit/components/select-kit";
 
 @selectKitOptions({
   icon: "plus",
