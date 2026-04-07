@@ -38,16 +38,10 @@ after_initialize do
   add_permitted_post_create_param("tags_to_add", :hash)
   on(:topic_created) do |topic, opts, user|
     tag_groups = opts[:tags_to_add]
-    guardian = Guardian.new(user)
     next unless tag_groups
-    tag_groups.each do |tag_group_name, tags|
-      tags.each do |tag|
-        tag = Tag.visible(guardian).find_by(name: tag)
-        tag = Tag.find_by_id(tag.target_tag_id) if tag.synonym?
-        next unless tag
-        next if topic.tags.exists?(tag.id)
-        topic.tags << tag
-      end
-    end
+
+    tag_names = tag_groups.values.flatten.uniq
+    # respects tagging restrictions like category tag and tag group permissions
+    DiscourseTagging.tag_topic_by_names(topic, Guardian.new(user), tag_names, append: true)
   end
 end
