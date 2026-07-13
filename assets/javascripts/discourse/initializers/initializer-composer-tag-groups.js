@@ -11,10 +11,9 @@ export default {
         api.container.lookup("service:dropdown-buttons").refreshButtons()
       );
 
-      api.modifyClass("model:composer", {
-        pluginId: "preset-topic-composer-initializer",
-        tag_groups: {},
-        tags_to_add: {},
+      api.addModelField("composer", "tag_groups", { defaultValue: () => ({}) });
+      api.addModelField("composer", "tags_to_add", {
+        defaultValue: () => ({}),
       });
 
       api.composerBeforeSave(() => {
@@ -27,7 +26,8 @@ export default {
 
           const { invalidInputs, tagsToAdd } = selectedButton.tagGroups.reduce(
             (result, { tagGroup }) => {
-              const composerModel = api.container.lookup("model:composer");
+              const composerModel =
+                api.container.lookup("service:composer").model;
               result.tagsToAdd[tagGroup] = composerModel.tags_to_add[tagGroup];
 
               const isValid =
@@ -46,7 +46,7 @@ export default {
             return notOk();
           }
 
-          const composerModel = api.container.lookup("model:composer");
+          const composerModel = api.container.lookup("service:composer").model;
           composerModel.tags_to_add = tagsToAdd;
           return ok();
         });
